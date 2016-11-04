@@ -36,19 +36,17 @@ class LocalBusinessSchemaBuilder extends SchemaBuilder {
         );
 
 
-        // todo check if geocodable is defined
-        echo "<pre>";
-        print_r('has geo ' . SiteConfig::has_extension('Geocodable') ? 'ja' : 'nee');
-        echo "</pre>";
-        exit();
-        $localBusiness->geo = new GeoCoordinatesSchema(
-            $siteConfig->getField('Lat'),
-            $siteConfig->getField('Lng')
-        );
+        if (SiteConfig::has_extension('Geocodable')) {
+            $localBusiness->geo = new GeoCoordinatesSchema(
+                $siteConfig->getField('Lat'),
+                $siteConfig->getField('Lng')
+            );
+        }
 
 
-        // todo check if field exists
-        $localBusiness->telephone = $siteConfig->getField('Phone');
+        if ($telephone = $siteConfig->getField('Phone')) {
+            $localBusiness->telephone = $telephone;
+        }
 
 
         /**
