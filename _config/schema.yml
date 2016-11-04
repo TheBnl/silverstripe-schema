@@ -1,0 +1,16 @@
+---
+Name: schema
+---
+Page:
+  extensions:
+    - SchemaExtension
+Schema:
+  config:
+    'Page':
+      - WebsiteSchemaBuilder
+      - BreadcrumbsSchemaBuilder
+      - OrganizationSchemaBuilder
+
+    # example blog post config
+    # 'BlogPost':
+    #   - ArticleSchemaBuilder
