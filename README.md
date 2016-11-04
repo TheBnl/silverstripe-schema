@@ -4,6 +4,7 @@ Add schema's to you pages. This module comes with the following standard schema'
 - Website schema
 - Breadcrumbs schema
 - Organization schema
+- Local Business Schema
 
 To find out more about these schema's and why you should include them on your page see the [documentation](https://developers.google.com/search/docs/data-types/data-type-selector) by Google.
 
