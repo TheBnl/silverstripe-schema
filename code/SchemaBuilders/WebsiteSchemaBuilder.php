@@ -30,7 +30,7 @@ class WebsiteSchemaBuilder extends SchemaBuilder {
         // add a search box if Fulltext search is enabled
         if (is_array(FulltextSearchable::get_searchable_classes())) {
             $website->potentialAction = new SearchActionSchema(
-                Director::absoluteBaseURL() . 'search?q={search_term_string}',
+                Director::absoluteBaseURL() . 'SearchForm?Search={search_term_string}',
                 'required name=search_term_string'
             );
         }
