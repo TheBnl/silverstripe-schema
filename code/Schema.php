@@ -21,7 +21,16 @@ class Schema {
      */
     public static function get_schema_config($className) {
         $configs = self::get_config('config');
-        return $configs[$className];
+
+	    $classes = array_reverse(ClassInfo::dataClassesFor($className));
+
+	    $out = array();
+	    foreach($classes as $key => $className) {
+		    if(!empty($configs[$className])) {
+			    array_push($out, $configs[$className]);
+		    }
+	    }
+        return $out;
     }
 
 
