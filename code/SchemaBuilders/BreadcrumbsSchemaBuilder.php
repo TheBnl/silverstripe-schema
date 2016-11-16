@@ -21,6 +21,9 @@ class BreadcrumbsSchemaBuilder extends SchemaBuilder {
     public static function get_schema($object)
     {
         $breadcrumbList = $object->getBreadcrumbItems();
+	    if($breadcrumbList->count() <=1) {
+		    return false;
+	    }
         return new BreadcrumbListSchema($breadcrumbList);
     }
 }
