@@ -27,7 +27,7 @@ class Schema {
 	    $out = array();
 	    foreach($classes as $key => $className) {
 		    if(!empty($configs[$className])) {
-			    array_push($out, $configs[$className]);
+			    $out = array_merge($out, $configs[$className]);
 		    }
 	    }
         return $out;
