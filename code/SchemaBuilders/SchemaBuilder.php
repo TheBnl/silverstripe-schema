@@ -15,8 +15,8 @@ abstract class SchemaBuilder extends Object {
     /**
      * Get the schema from the given data
      *
-     * @param $object
+     * @param $page
      */
-    public static function get_schema($object) {}
+    abstract public function getSchema($page);
 
 }

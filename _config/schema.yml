@@ -4,3 +4,8 @@ Name: schema
 Page:
   extensions:
     - SchemaExtension
+Schema:
+  config:
+    'Page':
+      - WebsiteSchemaBuilder
+      - BreadcrumbsSchemaBuilder

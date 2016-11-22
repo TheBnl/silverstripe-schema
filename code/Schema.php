@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Schema.php
  *
@@ -8,8 +9,8 @@
  * @author Bram de Leeuw
  * Date: 03/11/16
  */
-
-class Schema {
+class Schema
+{
 
     private static $logo = 'schema/images/default.png';
 
@@ -19,23 +20,43 @@ class Schema {
      * @param $className
      * @return mixed
      */
-    public static function get_schema_config($className) {
+    public static function get_schema_config($className)
+    {
+        $classes = array_reverse(ClassInfo::dataClassesFor($className));
         $configs = self::get_config('config');
+        $out = array();
 
-	    $classes = array_reverse(ClassInfo::dataClassesFor($className));
+        foreach ($classes as $key => $className) {
+            if (!empty($configs[$className])) {
+                $out = array_merge($out, $configs[$className]);
+            }
+        }
 
-	    $out = array();
-	    foreach($classes as $key => $className) {
-		    if(!empty($configs[$className])) {
-			    $out = array_merge($out, $configs[$className]);
-		    }
-	    }
-        return $out;
+        return array_unique($out);
     }
 
 
-    public static function get_config($value) {
+    /**
+     * Get a config value
+     *
+     * @param $value
+     * @return array|scalar
+     */
+    public static function get_config($value)
+    {
         return Config::inst()->get('Schema', $value);
     }
-    
+
+
+    /**
+     * Check
+     *
+     * @param $schema
+     * @return bool
+     */
+    public static function is_valid($schema)
+    {
+        return class_exists($schema) && new $schema() instanceof SchemaBuilder;
+    }
+
 }

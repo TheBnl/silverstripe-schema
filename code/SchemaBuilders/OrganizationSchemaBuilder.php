@@ -15,10 +15,10 @@ class OrganizationSchemaBuilder extends SchemaBuilder {
     /**
      * Create the organization schema object
      *
-     * @param Page $object
+     * @param Page $page
      * @return OrganizationSchema
      */
-    public static function get_schema($object)
+    public function getSchema($page)
     {
         $siteConfig = SiteConfig::current_site_config();
 

@@ -15,10 +15,10 @@ class LocalBusinessSchemaBuilder extends SchemaBuilder {
     /**
      * Create the local business schema object
      *
-     * @param Page $object
+     * @param Page $page
      * @return LocalBusinessSchema
      */
-    public static function get_schema($object)
+    public function getSchema($page)
     {
         $siteConfig = SiteConfig::current_site_config();
 

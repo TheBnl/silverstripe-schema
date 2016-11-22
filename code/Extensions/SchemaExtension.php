@@ -22,7 +22,7 @@ class SchemaExtension extends SiteTreeExtension
     {
         $schemas = Schema::get_schema_config($this->owner->getClassname());
         foreach ($schemas as $schema) {
-            if (self::schema_is_valid($schema)) $this->appendSchema($tags, new $schema());
+            if (Schema::is_valid($schema)) $this->appendSchema($tags, new $schema());
         }
     }
 
@@ -35,22 +35,12 @@ class SchemaExtension extends SiteTreeExtension
      */
     private function appendSchema(&$tags, SchemaBuilder $schema)
     {
-        $tags .= sprintf(
-            "<script type='application/ld+json'>%s</script>",
-            json_encode($schema::get_schema($this->owner))
-        );
-    }
-
-
-    /**
-     * Check
-     *
-     * @param $schema
-     * @return bool
-     */
-    private static function schema_is_valid($schema)
-    {
-        return class_exists($schema) && new $schema() instanceof SchemaBuilder;
+        if ($schema = $schema::create()->getSchema($this->owner)) {
+            $tags .= sprintf(
+                "<script type='application/ld+json'>%s</script>",
+                json_encode($schema)
+            );
+        }
     }
 
 }

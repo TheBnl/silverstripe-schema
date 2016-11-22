@@ -15,15 +15,16 @@ class BreadcrumbsSchemaBuilder extends SchemaBuilder {
     /**
      * Create the breadcrumb schema object
      *
-     * @param Page $object
+     * @param Page $page
      * @return BreadcrumbListSchema
      */
-    public static function get_schema($object)
+    public function getSchema($page)
     {
-        $breadcrumbList = $object->getBreadcrumbItems();
-	    if($breadcrumbList->count() <=1) {
-		    return false;
-	    }
-        return new BreadcrumbListSchema($breadcrumbList);
+        $breadcrumbList = $page->getBreadcrumbItems();
+	    if($breadcrumbList->count() > 1) {
+            return new BreadcrumbListSchema($breadcrumbList);
+	    } else {
+            return null;
+        }
     }
 }

@@ -15,10 +15,10 @@ class WebsiteSchemaBuilder extends SchemaBuilder {
     /**
      * Create the website schema object
      *
-     * @param Page $object
+     * @param Page $page
      * @return WebSiteSchema
      */
-    public static function get_schema($object)
+    public function getSchema($page)
     {
         $siteConfig = SiteConfig::current_site_config();
 
