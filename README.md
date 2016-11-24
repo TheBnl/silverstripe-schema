@@ -19,7 +19,7 @@ An example schema builder, that returns a basic array with properties.
  */
 class MySchemaBuilder extends SchemaBuilder 
 {
-    public static function get_schema($object)
+    public function getSchema($page)
     {
         $mySchema = array(
             // schema properties
@@ -44,7 +44,6 @@ Schema:
     'Page':
       - WebsiteSchemaBuilder
       - BreadcrumbsSchemaBuilder
-      - OrganizationSchemaBuilder
     # An example blog post schema (builder not implemented yet)
     'BlogPost':
       - ArticleSchemaBuilder
@@ -63,7 +62,7 @@ You can overwrite this method on your page class if neccicary.
 #### OrganizationSchemaBuilder
 
 The organization builder requires a `phone` field on the site config. 
-For the same as the builder now looks for `SocialMediaPlatform` relations on SiteConfig. 
+For the `SameAs` field (Shows social media link in the knowledge graph box) the builder now looks for `SocialMediaPlatform` relations on SiteConfig. 
 This is something that will be changed for a more generic approach  
 
 #### WebsiteSchemaBuilder

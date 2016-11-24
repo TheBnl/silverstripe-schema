@@ -38,7 +38,7 @@ class SchemaExtension extends SiteTreeExtension
         if ($schema = $schema::create()->getSchema($this->owner)) {
             $tags .= sprintf(
                 "<script type='application/ld+json'>%s</script>",
-                json_encode($schema)
+                Convert::array2json($schema)
             );
         }
     }
