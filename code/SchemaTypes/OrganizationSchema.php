@@ -25,6 +25,7 @@ class OrganizationSchema extends SchemaType
         $this->{'@type'} = 'Organization';
         $this->url = $url;
         $this->logo = $logo;
+        $this->sameAs = array();
     }
 
     /**
