@@ -25,7 +25,6 @@ class OrganizationSchema extends SchemaType
         $this->{'@type'} = 'Organization';
         $this->url = $url;
         $this->logo = $logo;
-        $this->sameAs = array();
     }
 
     /**
@@ -36,5 +35,15 @@ class OrganizationSchema extends SchemaType
     public function addContactPoint($contactPoint) {
         if (!isset($this->contactPoint)) $this->contactPoint = array();
         array_push($this->contactPoint, $contactPoint);
+    }
+
+    /**
+     * Add a same as social media reference
+     *
+     * @param $sameAs
+     */
+    public function addSameAs($sameAs) {
+        if (!isset($this->sameAs)) $this->sameAs = array();
+        array_push($this->sameAs, $sameAs);
     }
 }

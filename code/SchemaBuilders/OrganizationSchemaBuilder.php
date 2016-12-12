@@ -36,7 +36,7 @@ class OrganizationSchemaBuilder extends SchemaBuilder {
         // TODO make this more generic
         if (class_exists('SocialMediaPlatform') && $siteConfig->SocialMediaPlatforms() && $siteConfig->SocialMediaPlatforms()->Count()) {
             foreach ($siteConfig->SocialMediaPlatforms() as $platform) {
-                array_push($organization->sameAs, $platform->URL);
+                $organization->addSameAs($platform->URL);
             }
         }
 
