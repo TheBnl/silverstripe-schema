@@ -5,8 +5,11 @@
  * @author Bram de Leeuw
  * Date: 03/11/16
  */
- 
- 
+
+namespace Schema\Builder;
+
+use SilverStripe\Core\Object;
+
 /**
  * SchemaBuilder
  */

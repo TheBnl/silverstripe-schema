@@ -6,6 +6,18 @@
  * Date: 03/11/16
  */
 
+namespace Schema\Type;
+
+/**
+ * Class PostalAddressSchema
+ *
+ * @package Schema\Type
+ * @property string streetAddress;
+ * @property string addressLocality;
+ * @property string addressRegion;
+ * @property string postalCode;
+ * @property string addressCountry;
+ */
 class PostalAddressSchema extends SchemaType
 {
     /**

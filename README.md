@@ -37,13 +37,13 @@ one of the future features. Submitting a pull request with any Schema types or b
 
 To add the schema's to different page types you simply specify these in the config as such:
 ```yaml
-Schema:
+Schema\Schema:
   logo: 'path/to/your/logo.png'
   config:
     # The standard builders
     'Page':
-      - WebsiteSchemaBuilder
-      - BreadcrumbsSchemaBuilder
+      - Schema\Builder\Website
+      - Schema\Builder\Breadcrumbs
     # An example blog post schema (builder not implemented yet)
     'BlogPost':
       - ArticleSchemaBuilder

@@ -6,6 +6,14 @@
  * Date: 03/11/16
  */
 
+namespace Schema\Type;
+
+/**
+ * Class ThingSchema
+ *
+ * @package Schema\Type
+ * @property string name
+ */
 class ThingSchema extends SchemaType
 {
     /**

@@ -1,16 +1,23 @@
 <?php
 /**
- * OrganizationSchemaBuilder.php
+ * Organization.php
  *
  * @author Bram de Leeuw
  * Date: 03/11/16
  */
 
+namespace Schema\Builder;
+use Page;
+use Schema\Schema;
+use Schema\Type\ContactPointSchema;
+use Schema\Type\OrganizationSchema;
+use SilverStripe\Control\Director;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
- * Class OrganizationSchemaBuilder
+ * Class Organization
  */
-class OrganizationSchemaBuilder extends SchemaBuilder {
+class Organization extends SchemaBuilder {
 
     /**
      * Create the organization schema object

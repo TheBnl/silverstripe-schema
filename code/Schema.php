@@ -1,9 +1,16 @@
 <?php
 
+namespace Schema;
+
+use Schema\Builder\SchemaBuilder;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Core\Config\Config;
+
+
 /**
  * Schema.php
  *
- * make all data types possible
+ * todo make all data types possible
  * https://developers.google.com/search/docs/data-types/breadcrumbs
  *
  * @author Bram de Leeuw
@@ -25,7 +32,7 @@ class Schema
         $classes = array_reverse(ClassInfo::dataClassesFor($className));
         $configs = self::get_config('config');
         $out = array();
-
+	    
         foreach ($classes as $key => $className) {
             if (!empty($configs[$className])) {
                 $out = array_merge($out, $configs[$className]);
@@ -40,11 +47,11 @@ class Schema
      * Get a config value
      *
      * @param $value
-     * @return array|scalar
+     * @return array
      */
     public static function get_config($value)
     {
-        return Config::inst()->get('Schema', $value);
+        return Config::inst()->get('Schema\Schema', $value);
     }
 
 

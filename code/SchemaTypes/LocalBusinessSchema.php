@@ -6,10 +6,15 @@
  * Date: 04/11/16
  */
 
+namespace Schema\Type;
+
 /**
  * @property GeoCoordinatesSchema geo
  * @property string telephone
  * @property string image
+ * @property string name
+ * @property string address
+ * @property string url
  *
  * TODO: add support for following optional properties
  * potentialAction

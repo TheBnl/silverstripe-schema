@@ -1,16 +1,25 @@
 <?php
 /**
- * LocalBusinessSchemaBuilder.php
+ * LocalBusiness.php
  *
  * @author Bram de Leeuw
  * Date: 04/11/16
  */
 
+namespace Schema\Builder;
+
+use Page;
+use Schema\Schema;
+use Schema\Type\GeoCoordinatesSchema;
+use Schema\Type\LocalBusinessSchema;
+use Schema\Type\PostalAddressSchema;
+use SilverStripe\Control\Director;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
- * Class LocalBusinessSchemaBuilder
+ * Class LocalBusiness
  */
-class LocalBusinessSchemaBuilder extends SchemaBuilder {
+class LocalBusiness extends SchemaBuilder {
 
     /**
      * Create the local business schema object
@@ -24,7 +33,7 @@ class LocalBusinessSchemaBuilder extends SchemaBuilder {
 
         $localBusiness = new LocalBusinessSchema(
             Director::absoluteBaseURL(),
-            $siteConfig->getField('Title'),
+            $siteConfig->Title,
             new PostalAddressSchema(
                 $siteConfig->getField('Address'),
                 $siteConfig->getField('Suburb'),

@@ -6,6 +6,14 @@
  * Date: 03/11/16
  */
 
+namespace Schema\Type;
+
+/**
+ * Class GeoCoordinatesSchema
+ * @package Schema\Type
+ * @property float latitude;
+ * @property float longitude;
+ */
 class GeoCoordinatesSchema extends SchemaType
 {
     /**

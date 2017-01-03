@@ -6,6 +6,8 @@
  * Date: 04/11/16
  */
 
+namespace Schema\Type;
+
 /**
  * Class ContactPointSchema
  * @property array contactOption
@@ -13,6 +15,8 @@
  * TODO: handle the following properties
  * @property array areaServed
  * @property array availableLanguage
+ * @property string telephone
+ * @property string contactType
  */
 class ContactPointSchema extends SchemaType
 {
@@ -67,6 +71,7 @@ class ContactPointSchema extends SchemaType
 
     /**
      * Check if the contact type is valid
+     *
      * @param $contactType
      * @return mixed
      */

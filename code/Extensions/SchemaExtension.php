@@ -6,6 +6,11 @@
  * Date: 03/11/16
  */
 
+namespace Schema;
+
+use Schema\Builder\SchemaBuilder;
+use SilverStripe\CMS\Model\SiteTreeExtension;
+use SilverStripe\Core\Convert;
 
 /**
  * SchemaExtension
@@ -21,6 +26,7 @@ class SchemaExtension extends SiteTreeExtension
     public function MetaTags(&$tags)
     {
         $schemas = Schema::get_schema_config($this->owner->getClassname());
+
         foreach ($schemas as $schema) {
             if (Schema::is_valid($schema)) $this->appendSchema($tags, new $schema());
         }

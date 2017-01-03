@@ -6,10 +6,15 @@
  * Date: 04/11/16
  */
 
+namespace Schema\Type;
+
 /**
  * Class WebSiteSchema
+ *
  * @property string alternateName
  * @property string potentialAction
+ * @property string name
+ * @property string url
  */
 class WebSiteSchema extends SchemaType
 {

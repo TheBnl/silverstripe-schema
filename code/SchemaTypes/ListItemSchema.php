@@ -6,6 +6,14 @@
  * Date: 03/11/16
  */
 
+namespace Schema\Type;
+
+/**
+ * Class ListItemSchema
+ * @package Schema\Type
+ * @property string position
+ * @property string item
+ */
 class ListItemSchema extends SchemaType
 {
     /**

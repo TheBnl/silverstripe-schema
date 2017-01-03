@@ -6,10 +6,14 @@
  * Date: 04/11/16
  */
 
+namespace Schema\Type;
+
 /**
  * Class OrganizationSchema
  * @property array contactPoint
  * @property array sameAs
+ * @property string url
+ * @property string logo
  */
 class OrganizationSchema extends SchemaType
 {

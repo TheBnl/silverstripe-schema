@@ -6,6 +6,16 @@
  * Date: 03/11/16
  */
 
+namespace Schema\Type;
+
+use SilverStripe\ORM\ArrayList;
+
+/**
+ * Class BreadcrumbListSchema
+ * @package Schema\Type
+ *
+ * @property array itemListElement;
+ */
 class BreadcrumbListSchema extends SchemaType
 {
     /**

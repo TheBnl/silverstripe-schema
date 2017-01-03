@@ -1,16 +1,20 @@
 <?php
 /**
- * BreadcrumbsSchemaBuilder.php
+ * Breadcrumbs.php
  *
  * @author Bram de Leeuw
  * Date: 03/11/16
  */
 
+namespace Schema\Builder;
+
+use Page;
+use Schema\Type\BreadcrumbListSchema;
 
 /**
- * Class BreadcrumbsSchemaBuilder
+ * Class Breadcrumbs
  */
-class BreadcrumbsSchemaBuilder extends SchemaBuilder {
+class Breadcrumbs extends SchemaBuilder {
 
     /**
      * Create the breadcrumb schema object
