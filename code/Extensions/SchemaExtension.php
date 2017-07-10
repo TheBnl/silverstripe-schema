@@ -6,11 +6,12 @@
  * Date: 03/11/16
  */
 
-namespace Schema;
+namespace Broarm\Schema;
 
-use Schema\Builder\SchemaBuilder;
-use SilverStripe\CMS\Model\SiteTreeExtension;
-use SilverStripe\Core\Convert;
+use Broarm\Schema\Builder\SchemaBuilder;
+use Config;
+use Convert;
+use SiteTreeExtension;
 
 /**
  * SchemaExtension
@@ -25,10 +26,9 @@ class SchemaExtension extends SiteTreeExtension
      */
     public function MetaTags(&$tags)
     {
-        $schemas = Schema::get_schema_config($this->owner->getClassname());
-
+        $schemas = Config::inst()->get($this->owner->getClassName(), 'active_schema');
         foreach ($schemas as $schema) {
-            if (Schema::is_valid($schema)) $this->appendSchema($tags, new $schema());
+            if (self::is_valid($schema)) $this->appendSchema($tags, new $schema());
         }
     }
 
@@ -41,12 +41,24 @@ class SchemaExtension extends SiteTreeExtension
      */
     private function appendSchema(&$tags, SchemaBuilder $schema)
     {
-        if ($schema = $schema::create()->getSchema($this->owner)) {
+        if ($schema = $schema->getSchema($this->owner)) {
             $tags .= sprintf(
                 "<script type='application/ld+json'>%s</script>",
                 Convert::array2json($schema)
             );
         }
+    }
+
+    /**
+     * Check if the set schema is of an active and available type
+     *
+     * @param $schema
+     *
+     * @return bool
+     */
+    private static function is_valid($schema)
+    {
+        return class_exists($schema) && new $schema() instanceof SchemaBuilder;
     }
 
 }

@@ -6,13 +6,16 @@
  * Date: 03/11/16
  */
 
-namespace Schema\Builder;
+namespace Broarm\Schema\Builder;
+
+use Broarm\Schema\Type\ContactPointSchema;
+use Broarm\Schema\Type\ImageObjectSchema;
+use Broarm\Schema\Type\OrganizationSchema;
+use Config;
+use Director;
 use Page;
-use Schema\Schema;
-use Schema\Type\ContactPointSchema;
-use Schema\Type\OrganizationSchema;
-use SilverStripe\Control\Director;
-use SilverStripe\SiteConfig\SiteConfig;
+use SiteConfig;
+
 
 /**
  * Class Organization
@@ -30,8 +33,11 @@ class Organization extends SchemaBuilder {
         $siteConfig = SiteConfig::current_site_config();
 
         $organization = new OrganizationSchema(
+            SiteConfig::current_site_config()->Title,
             Director::absoluteBaseURL(),
-            Director::absoluteBaseURL() . Schema::get_config('logo')
+            new ImageObjectSchema(
+                Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image')
+            )
         );
 
         // TODO: make more generic

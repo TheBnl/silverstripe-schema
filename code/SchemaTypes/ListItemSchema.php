@@ -6,11 +6,11 @@
  * Date: 03/11/16
  */
 
-namespace Schema\Type;
+namespace Broarm\Schema\Type;
 
 /**
  * Class ListItemSchema
- * @package Schema\Type
+ * @package Broarm\Schema\Type
  * @property string position
  * @property string item
  */

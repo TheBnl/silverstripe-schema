@@ -6,13 +6,13 @@
  * Date: 03/11/16
  */
 
-namespace Schema\Type;
+namespace Broarm\Schema\Type;
 
-use SilverStripe\ORM\ArrayList;
+use ArrayList;
 
 /**
  * Class BreadcrumbListSchema
- * @package Schema\Type
+ * @package Broarm\Schema\Type
  *
  * @property array itemListElement;
  */

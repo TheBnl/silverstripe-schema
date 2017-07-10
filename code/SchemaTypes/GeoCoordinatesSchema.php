@@ -6,11 +6,11 @@
  * Date: 03/11/16
  */
 
-namespace Schema\Type;
+namespace Broarm\Schema\Type;
 
 /**
  * Class GeoCoordinatesSchema
- * @package Schema\Type
+ * @package Broarm\Schema\Type
  * @property float latitude;
  * @property float longitude;
  */

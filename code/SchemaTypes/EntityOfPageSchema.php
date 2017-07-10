@@ -9,22 +9,22 @@
 namespace Broarm\Schema\Type;
 
 /**
- * Class ThingSchema
+ * Class EntityOfPageSchema
+ * @author Bram de Leeuw
+ * Date: 10/07/17
  *
  * @package Broarm\Schema\Type
- * @property string name
  */
-class ThingSchema extends SchemaType
+class EntityOfPageSchema extends SchemaType
 {
     /**
-     * ItemSchema constructor.
+     * EntityOfPageSchema constructor.
      *
      * @param $id
-     * @param $name
      */
-    public function __construct($id, $name)
+    public function __construct($id)
     {
+        $this->{'@type'} = 'WebPage';
         $this->{'@id'} = $id;
-        $this->name = $name;
     }
 }

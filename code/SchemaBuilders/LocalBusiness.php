@@ -6,15 +6,17 @@
  * Date: 04/11/16
  */
 
-namespace Schema\Builder;
+namespace Broarm\Schema\Builder;
 
+use Broarm\Schema\Schema;
+use Broarm\Schema\Type\GeoCoordinatesSchema;
+use Broarm\Schema\Type\LocalBusinessSchema;
+use Broarm\Schema\Type\PostalAddressSchema;
+use Config;
+use Director;
 use Page;
-use Schema\Schema;
-use Schema\Type\GeoCoordinatesSchema;
-use Schema\Type\LocalBusinessSchema;
-use Schema\Type\PostalAddressSchema;
-use SilverStripe\Control\Director;
-use SilverStripe\SiteConfig\SiteConfig;
+use SiteConfig;
+
 
 /**
  * Class LocalBusiness
@@ -63,7 +65,7 @@ class LocalBusiness extends SchemaBuilder {
          * Schema:
          *  logo: 'path/to/logo.png'
          */
-        $localBusiness->image = Director::absoluteBaseURL() . Schema::get_config('logo');
+        $localBusiness->image = Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image');
 
         return $localBusiness;
     }

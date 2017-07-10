@@ -6,9 +6,10 @@
  * Date: 03/11/16
  */
 
-namespace Schema\Builder;
+namespace Broarm\Schema\Builder;
 
-use SilverStripe\Core\Object;
+use Object;
+
 
 /**
  * SchemaBuilder

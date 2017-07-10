@@ -2,10 +2,13 @@
 Name: schema
 ---
 Page:
+  # default_image: 'path/to/logo.png'
   extensions:
-    - Schema\SchemaExtension
-Schema\Schema:
-  config:
-    'Page':
-      - Schema\Builder\Website
-      - Schema\Builder\Breadcrumbs
+    - 'Broarm\Schema\SchemaExtension'
+  active_schema:
+    - 'Broarm\Schema\Builder\LocalBusiness'
+    - 'Broarm\Schema\Builder\Website'
+    - 'Broarm\Schema\Builder\Breadcrumbs'
+BlogPost:
+  active_schema:
+    - 'Broarm\Schema\Builder\NewsArticle'

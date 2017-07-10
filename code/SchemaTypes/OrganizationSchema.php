@@ -6,27 +6,29 @@
  * Date: 04/11/16
  */
 
-namespace Schema\Type;
+namespace Broarm\Schema\Type;
 
 /**
  * Class OrganizationSchema
- * @property array contactPoint
- * @property array sameAs
- * @property string url
- * @property string logo
+ *
+ * @property string            name
+ * @property string            url
+ * @property ImageObjectSchema logo
  */
 class OrganizationSchema extends SchemaType
 {
     /**
      * OrganizationSchema constructor.
      *
-     * @param string $url
-     * @param string $logo
+     * @param                   $name
+     * @param                   $url
+     * @param ImageObjectSchema $logo
      */
-    public function __construct($url, $logo)
+    public function __construct($name, $url, ImageObjectSchema $logo)
     {
         $this->{'@context'} = 'http://schema.org';
         $this->{'@type'} = 'Organization';
+        $this->name = $url;
         $this->url = $url;
         $this->logo = $logo;
     }
@@ -36,8 +38,11 @@ class OrganizationSchema extends SchemaType
      *
      * @param ContactPointSchema|array $contactPoint
      */
-    public function addContactPoint($contactPoint) {
-        if (!isset($this->contactPoint)) $this->contactPoint = array();
+    public function addContactPoint($contactPoint)
+    {
+        if (!isset($this->contactPoint)) {
+            $this->contactPoint = array();
+        }
         array_push($this->contactPoint, $contactPoint);
     }
 
@@ -46,8 +51,11 @@ class OrganizationSchema extends SchemaType
      *
      * @param $sameAs
      */
-    public function addSameAs($sameAs) {
-        if (!isset($this->sameAs)) $this->sameAs = array();
+    public function addSameAs($sameAs)
+    {
+        if (!isset($this->sameAs)) {
+            $this->contactPoint = array();
+        }
         array_push($this->sameAs, $sameAs);
     }
 }

@@ -6,13 +6,15 @@
  * Date: 04/11/16
  */
 
-namespace Schema\Builder;
+namespace Broarm\Schema\Builder;
+
+use Broarm\Schema\Type\SearchActionSchema;
+use Broarm\Schema\Type\WebSiteSchema;
+use Director;
+use FulltextSearchable;
 use Page;
-use Schema\Type\SearchActionSchema;
-use Schema\Type\WebSiteSchema;
-use SilverStripe\Control\Director;
-use SilverStripe\ORM\Search\FulltextSearchable;
-use SilverStripe\SiteConfig\SiteConfig;
+use SiteConfig;
+
 
 /**
  * Class Website

@@ -1,0 +1,60 @@
+<?php
+
+namespace Broarm\Schema\Builder;
+
+use Broarm\Schema\Type\EntityOfPageSchema;
+use Broarm\Schema\Type\ImageObjectSchema;
+use Broarm\Schema\Type\NewsArticleSchema;
+use Broarm\Schema\Type\OrganizationSchema;
+use Broarm\Schema\Type\PersonSchema;
+use Broarm\Schema\Type\WebSiteSchema;
+use BlogPost;
+use Config;
+use Director;
+use Page;
+use SiteConfig;
+
+/**
+ * Class NewsArticle
+ * @author Bram de Leeuw
+ * Date: 10/07/17
+ */
+class NewsArticle extends SchemaBuilder {
+
+    /**
+     * Create the website schema object
+     *
+     * @param Page|BlogPost $page
+     * @return NewsArticleSchema
+     */
+    public function getSchema($page)
+    {
+        $newsArticle = new NewsArticleSchema(
+            $page->Title,
+            $page->PublishDate,
+            $page->LastEdited,
+            $page->dbObject('Content')->FirstParagraph(),
+            new EntityOfPageSchema($page->AbsoluteLink()),
+            new PersonSchema($page->getCredits()->first()->Name),
+            new OrganizationSchema(
+                SiteConfig::current_site_config()->Title,
+                Director::absoluteBaseURL(),
+                new ImageObjectSchema(
+                    Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image')
+                )
+            )
+        );
+
+        /** @var \Image $featuredImage */
+        $featuredImage = $page->FeaturedImage();
+        if ($featuredImage->exists()) {
+            $newsArticle->setImageObject(new ImageObjectSchema(
+                $featuredImage->Fill(800,800)->AbsoluteLink(),
+                800,
+                800
+            ));
+        }
+
+        return $newsArticle;
+    }
+}

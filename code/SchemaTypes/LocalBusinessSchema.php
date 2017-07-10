@@ -6,7 +6,7 @@
  * Date: 04/11/16
  */
 
-namespace Schema\Type;
+namespace Broarm\Schema\Type;
 
 /**
  * @property GeoCoordinatesSchema geo

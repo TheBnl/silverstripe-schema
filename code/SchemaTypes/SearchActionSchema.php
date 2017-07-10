@@ -6,12 +6,12 @@
  * Date: 04/11/16
  */
 
-namespace Schema\Type;
+namespace Broarm\Schema\Type;
 
 /**
  * Class SearchActionSchema
  *
- * @package Schema\Type
+ * @package Broarm\Schema\Type
  * @property string target
  */
 class SearchActionSchema extends SchemaType
