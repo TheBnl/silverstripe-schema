@@ -29,13 +29,19 @@ class NewsArticle extends SchemaBuilder {
      */
     public function getSchema($page)
     {
+        if (($credits = $page->getCredits()) && $credits->exists()) {
+            $author = $credits->first()->Name;
+        } else {
+            $author = SiteConfig::current_site_config()->Title;
+        }
+
         $newsArticle = new NewsArticleSchema(
             $page->Title,
             $page->PublishDate,
             $page->LastEdited,
             $page->dbObject('Content')->FirstParagraph(),
             new EntityOfPageSchema($page->AbsoluteLink()),
-            new PersonSchema($page->getCredits()->first()->Name),
+            new PersonSchema($author),
             new OrganizationSchema(
                 SiteConfig::current_site_config()->Title,
                 Director::absoluteBaseURL(),

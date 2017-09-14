@@ -54,7 +54,7 @@ class OrganizationSchema extends SchemaType
     public function addSameAs($sameAs)
     {
         if (!isset($this->sameAs)) {
-            $this->contactPoint = array();
+            $this->sameAs = array();
         }
         array_push($this->sameAs, $sameAs);
     }
