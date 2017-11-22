@@ -9,7 +9,9 @@
 namespace Broarm\Schema;
 
 use Broarm\Schema\Builder\SchemaBuilder;
-
+use SilverStripe\CMS\Model\SiteTreeExtension;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Convert;
 
 /**
  * SchemaExtension
