@@ -7,24 +7,23 @@ use Broarm\Schema\Type\ImageObjectSchema;
 use Broarm\Schema\Type\NewsArticleSchema;
 use Broarm\Schema\Type\OrganizationSchema;
 use Broarm\Schema\Type\PersonSchema;
-use Broarm\Schema\Type\WebSiteSchema;
-use BlogPost;
-use Config;
-use Director;
-use Page;
-use SiteConfig;
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class NewsArticle
+ *
  * @author Bram de Leeuw
  * Date: 10/07/17
  */
-class NewsArticle extends SchemaBuilder {
-
+class NewsArticle extends SchemaBuilder
+{
     /**
      * Create the website schema object
      *
-     * @param Page|BlogPost $page
+     * @param \Page|\BlogPost $page
+     *
      * @return NewsArticleSchema
      */
     public function getSchema($page)
@@ -55,7 +54,7 @@ class NewsArticle extends SchemaBuilder {
         $featuredImage = $page->FeaturedImage();
         if ($featuredImage->exists()) {
             $newsArticle->setImageObject(new ImageObjectSchema(
-                $featuredImage->Fill(800,800)->AbsoluteLink(),
+                $featuredImage->Fill(800, 800)->AbsoluteLink(),
                 800,
                 800
             ));

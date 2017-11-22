@@ -10,21 +10,20 @@ namespace Broarm\Schema\Builder;
 
 use Broarm\Schema\Type\SearchActionSchema;
 use Broarm\Schema\Type\WebSiteSchema;
-use Director;
-use FulltextSearchable;
-use Page;
-use SiteConfig;
-
+use SilverStripe\Control\Director;
+use SilverStripe\ORM\Search\FulltextSearchable;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class Website
  */
-class Website extends SchemaBuilder {
-
+class Website extends SchemaBuilder
+{
     /**
      * Create the website schema object
      *
-     * @param Page $page
+     * @param \Page $page
+     *
      * @return WebSiteSchema
      */
     public function getSchema($page)

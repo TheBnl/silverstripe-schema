@@ -8,8 +8,6 @@
 
 namespace Broarm\Schema\Type;
 
-use ArrayList;
-
 /**
  * Class BreadcrumbListSchema
  * @package Broarm\Schema\Type

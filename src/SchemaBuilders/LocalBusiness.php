@@ -12,21 +12,20 @@ use Broarm\Schema\Schema;
 use Broarm\Schema\Type\GeoCoordinatesSchema;
 use Broarm\Schema\Type\LocalBusinessSchema;
 use Broarm\Schema\Type\PostalAddressSchema;
-use Config;
-use Director;
-use Page;
-use SiteConfig;
-
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class LocalBusiness
  */
-class LocalBusiness extends SchemaBuilder {
-
+class LocalBusiness extends SchemaBuilder
+{
     /**
      * Create the local business schema object
      *
      * @param Page $page
+     *
      * @return LocalBusinessSchema
      */
     public function getSchema($page)

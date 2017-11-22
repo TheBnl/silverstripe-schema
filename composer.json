@@ -11,8 +11,7 @@
     }
   ],
   "require": {
-    "silverstripe/framework": ">=3.1",
-    "composer/installers": "*"
+    "silverstripe/framework": "~4.0"
   },
   "extra": {
     "installer-name": "schema"

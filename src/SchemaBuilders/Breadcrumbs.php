@@ -9,8 +9,6 @@
 namespace Broarm\Schema\Builder;
 
 use Broarm\Schema\Type\BreadcrumbListSchema;
-use Page;
-
 
 /**
  * Class Breadcrumbs

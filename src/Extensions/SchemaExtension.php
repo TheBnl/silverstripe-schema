@@ -9,9 +9,7 @@
 namespace Broarm\Schema;
 
 use Broarm\Schema\Builder\SchemaBuilder;
-use Config;
-use Convert;
-use SiteTreeExtension;
+
 
 /**
  * SchemaExtension

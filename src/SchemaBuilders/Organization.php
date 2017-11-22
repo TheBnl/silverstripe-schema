@@ -11,21 +11,20 @@ namespace Broarm\Schema\Builder;
 use Broarm\Schema\Type\ContactPointSchema;
 use Broarm\Schema\Type\ImageObjectSchema;
 use Broarm\Schema\Type\OrganizationSchema;
-use Config;
-use Director;
-use Page;
-use SiteConfig;
-
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class Organization
  */
-class Organization extends SchemaBuilder {
-
+class Organization extends SchemaBuilder
+{
     /**
      * Create the organization schema object
      *
-     * @param Page $page
+     * @param \Page $page
+     *
      * @return OrganizationSchema
      */
     public function getSchema($page)
