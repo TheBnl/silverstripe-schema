@@ -5,6 +5,7 @@ Add schema's to you pages. This module comes with the following standard schema'
 - Breadcrumbs schema
 - Organization schema
 - Local Business Schema
+- News Article Schema
 
 To find out more about these schema's and why you should include them on your page see the [documentation](https://developers.google.com/search/docs/data-types/data-type-selector) by Google.
 
@@ -37,16 +38,17 @@ one of the future features. Submitting a pull request with any Schema types or b
 
 To add the schema's to different page types you simply specify these in the config as such:
 ```yaml
-Schema\Schema:
-  logo: 'path/to/your/logo.png'
-  config:
-    # The standard builders
-    'Page':
-      - Schema\Builder\Website
-      - Schema\Builder\Breadcrumbs
-    # An example blog post schema (builder not implemented yet)
-    'BlogPost':
-      - ArticleSchemaBuilder
+Page:
+  default_image: 'path/to/logo.png'
+  extensions:
+    - 'Broarm\Schema\SchemaExtension'
+  active_schema:
+    - 'Broarm\Schema\Builder\LocalBusiness'
+    - 'Broarm\Schema\Builder\Website'
+    - 'Broarm\Schema\Builder\Breadcrumbs'
+BlogPost:
+  active_schema:
+    - 'Broarm\Schema\Builder\NewsArticle'
 ```
 
 #### LocalBusinessSchemaBuilder
@@ -76,7 +78,6 @@ The following Schema's are to be added in the near future, feel free to make a P
 
 - Events
 - Products
-- Articles
 - Courses
 - Music
 - Recipes
@@ -85,32 +86,3 @@ The following Schema's are to be added in the near future, feel free to make a P
 - TVSeason
 - TVEpisode
 - Videos
-
-## License
-
-Copyright (c) 2016, Bram de Leeuw
-All rights reserved.
-
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
- * Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in the
-   documentation and/or other materials provided with the distribution.
- * The name of Bram de Leeuw may not be used to endorse or promote products
-   derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
