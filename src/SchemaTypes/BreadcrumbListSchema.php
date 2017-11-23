@@ -8,6 +8,8 @@
 
 namespace Broarm\Schema\Type;
 
+use SilverStripe\ORM\ArrayList;
+
 /**
  * Class BreadcrumbListSchema
  * @package Broarm\Schema\Type
@@ -31,7 +33,6 @@ class BreadcrumbListSchema extends SchemaType
             $this->makeItemListElement($breadcrumbs);
         }
     }
-
 
     /**
      * Construct the breadcrumb list
