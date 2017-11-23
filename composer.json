@@ -1,19 +1,21 @@
 {
   "name": "bramdeleeuw/silverstripe-schema",
   "description": "Add schema to a Silverstripe page",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "keywords": ["silverstripe", "schema", "structured data", "knowledge graph"],
   "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Bram de Leeuw",
-      "email": "bram-de-leeuw@hotmai.com"
+      "email": "bram@broarm.nl"
     }
   ],
   "require": {
     "silverstripe/framework": "~4.0"
   },
-  "extra": {
-    "installer-name": "schema"
+  "autoload": {
+    "psr-4": {
+      "Broarm\\Schema\\": "src"
+    }
   }
 }
