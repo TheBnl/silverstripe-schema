@@ -4,7 +4,7 @@ namespace Broarm\Schema;
 
 use Broarm\Schema\Builder\SchemaBuilder;
 use ClassInfo;
-use Object;
+use SS_Object;
 
 /**
  * Schema.php
@@ -18,7 +18,7 @@ use Object;
  * Date: 03/11/16
  * @deprecated
  */
-class Schema extends Object
+class Schema extends SS_Object
 {
     //private static $logo = 'schema/images/default.png';
 
