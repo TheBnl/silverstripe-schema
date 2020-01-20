@@ -8,13 +8,13 @@
 
 namespace Broarm\Schema\Builder;
 
-use Object;
+use SS_Object;
 
 
 /**
  * SchemaBuilder
  */
-abstract class SchemaBuilder extends Object {
+abstract class SchemaBuilder extends SS_Object {
 
     /**
      * Get the schema from the given data
