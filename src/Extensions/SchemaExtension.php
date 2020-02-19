@@ -12,6 +12,7 @@ use Broarm\Schema\Builder\SchemaBuilder;
 use SilverStripe\CMS\Model\SiteTreeExtension;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
+use SilverStripe\View\Requirements;
 
 /**
  * SchemaExtension
@@ -42,10 +43,10 @@ class SchemaExtension extends SiteTreeExtension
     private function appendSchema(&$tags, SchemaBuilder $schema)
     {
         if ($schema = $schema->getSchema($this->owner)) {
-            $tags .= sprintf(
+            Requirements::insertHeadTags(sprintf(
                 "<script type='application/ld+json'>%s</script>",
                 Convert::array2json($schema)
-            );
+            ), get_class($schema));
         }
     }
 
