@@ -16,6 +16,7 @@ namespace Broarm\Schema\Type;
  * @property string gtin
  * @property BrandSchema brand
  * @property OfferSchema offers
+ * @property array image
  */
 class ProductSchema extends SchemaType
 {
@@ -28,6 +29,6 @@ class ProductSchema extends SchemaType
         $this->gtin = $gtin;
         $this->brand = $brand;
         $this->offers = $offer;
-        $this->images = $images;
+        $this->image = $images;
     }
 }
