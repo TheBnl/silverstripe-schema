@@ -9,25 +9,26 @@
 namespace Broarm\Schema;
 
 use Broarm\Schema\Builder\SchemaBuilder;
-use SilverStripe\CMS\Model\SiteTreeExtension;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
+use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\Requirements;
 
 /**
  * SchemaExtension
  */
-class SchemaExtension extends SiteTreeExtension
+class SchemaExtension extends DataExtension
 {
 
     /**
      * Hook onto the page meta tags and append any configured schema objects
+     * fixme: does not trigger correctly on DataObjects pages
      *
      * @param $tags
      */
-    public function MetaTags(&$tags)
+    public function MetaComponents(&$tags)
     {
-        $schemas = Config::inst()->get($this->owner->getClassName(), 'active_schema');
+        $schemas = array_filter($this->owner->config()->get('active_schema'));
         foreach ($schemas as $schema) {
             if (self::is_valid($schema)) $this->appendSchema($tags, new $schema());
         }
@@ -45,7 +46,7 @@ class SchemaExtension extends SiteTreeExtension
         if ($schema = $schema->getSchema($this->owner)) {
             Requirements::insertHeadTags(sprintf(
                 "<script type='application/ld+json'>%s</script>",
-                Convert::array2json($schema)
+                json_encode($schema)
             ), get_class($schema));
         }
     }
