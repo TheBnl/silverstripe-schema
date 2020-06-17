@@ -26,7 +26,7 @@ class SchemaExtension extends DataExtension
      *
      * @param $tags
      */
-    public function MetaComponents(&$tags)
+    public function MetaTags(&$tags)
     {
         $schemas = array_filter($this->owner->config()->get('active_schema'));
         foreach ($schemas as $schema) {
