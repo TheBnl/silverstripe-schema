@@ -9,4 +9,6 @@
 namespace Broarm\Schema\Type;
 
 abstract class SchemaType
-{}
+{
+    protected $type = '';
+}
