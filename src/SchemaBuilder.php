@@ -6,7 +6,7 @@
  * Date: 03/11/16
  */
 
-namespace Broarm\Schema\Builder;
+namespace Broarm\Schema;
 
 /**
  * SchemaBuilder
@@ -19,4 +19,9 @@ abstract class SchemaBuilder
      * @param $page
      */
     abstract public function getSchema($page);
+
+
+
+
+
 }

@@ -8,6 +8,7 @@
 
 namespace Broarm\Schema\Builder;
 
+use Broarm\Schema\SchemaBuilder;
 use Spatie\SchemaOrg\BreadcrumbList;
 use Spatie\SchemaOrg\ListItem;
 

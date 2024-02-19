@@ -8,6 +8,7 @@
 
 namespace Broarm\Schema\Builder;
 
+use Broarm\Schema\SchemaBuilder;
 use SilverStripe\Control\Director;
 use SilverStripe\SiteConfig\SiteConfig;
 use Spatie\SchemaOrg\WebSite as SchemaOrgWebSite;
