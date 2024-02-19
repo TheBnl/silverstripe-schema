@@ -6,10 +6,8 @@ Page:
   extensions:
     - 'Broarm\Schema\SchemaExtension'
   active_schema:
-    - 'Broarm\Schema\Builder\LocalBusiness'
     - 'Broarm\Schema\Builder\Website'
     - 'Broarm\Schema\Builder\Breadcrumbs'
-
-SilverStripe\Blog\Model\BlogPost:
-  active_schema:
-    - 'Broarm\Schema\Builder\NewsArticle'
+# SilverStripe\Blog\Model\BlogPost:
+#   active_schema:
+#     - 'Broarm\Schema\Builder\NewsArticle'
