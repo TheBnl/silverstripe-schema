@@ -19,7 +19,6 @@ use SilverStripe\View\Requirements;
  */
 class SchemaExtension extends DataExtension
 {
-
     /**
      * Hook onto the page meta tags and append any configured schema objects
      * fixme: does not trigger correctly on DataObjects pages
@@ -30,7 +29,9 @@ class SchemaExtension extends DataExtension
     {
         $schemas = array_filter($this->owner->config()->get('active_schema'));
         foreach ($schemas as $schema) {
-            if (self::is_valid($schema)) $this->appendSchema($tags, new $schema());
+            if (self::is_valid($schema)) {
+                $this->appendSchema($tags, new $schema());
+            }
         }
     }
 
@@ -43,11 +44,12 @@ class SchemaExtension extends DataExtension
      */
     private function appendSchema(&$tags, SchemaBuilder $schema)
     {
-        if ($schema = $schema->getSchema($this->owner)) {
-            Requirements::insertHeadTags(sprintf(
-                "<script type='application/ld+json'>%s</script>",
-                json_encode($schema)
-            ), get_class($schema));
+        $schema = $schema->getSchema($this->owner);
+        if ($schema) {
+            Requirements::insertHeadTags(
+                '<script type="application/ld+json">' . json_encode($schema->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
+                get_class($schema)
+            );
         }
     }
 

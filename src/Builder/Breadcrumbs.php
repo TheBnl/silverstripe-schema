@@ -8,26 +8,34 @@
 
 namespace Broarm\Schema\Builder;
 
-use Broarm\Schema\Type\BreadcrumbListSchema;
+use Spatie\SchemaOrg\BreadcrumbList;
+use Spatie\SchemaOrg\ListItem;
 
 /**
  * Class Breadcrumbs
  */
 class Breadcrumbs extends SchemaBuilder
 {
-
     /**
      * Create the breadcrumb schema object
      *
      * @param Page $page
      *
-     * @return BreadcrumbListSchema
+     * @return BreadcrumbList|null
      */
     public function getSchema($page)
     {
         $breadcrumbList = $page->getBreadcrumbItems();
         if ($breadcrumbList->count() > 1) {
-            return new BreadcrumbListSchema($breadcrumbList);
+            $obj = new BreadcrumbList();
+            foreach ($breadcrumbList as $pos => $page) {
+                $breadcrumb = new ListItem();
+                $breadcrumb->name($page->Title);
+                $breadcrumb->position($pos);
+                $breadcrumb->url($page->AbsoluteLink());
+                $obj->itemListElement($breadcrumb);
+            }
+            return $obj;
         } else {
             return null;
         }
