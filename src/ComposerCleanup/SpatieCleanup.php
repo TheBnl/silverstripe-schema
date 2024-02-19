@@ -24,6 +24,8 @@ class SpatieCleanup implements Flushable
     use Configurable;
     use Injectable;
 
+    private const DEBUG = false;
+
     private static $folders_to_delete = [
         'vendor/spatie/schema-org/generator',
         'vendor/spatie/schema-org/src',
@@ -34,7 +36,14 @@ class SpatieCleanup implements Flushable
     ];
 
     private static $keep_files = [
+        'vendor/spatie/schema-org/src/Type.php',
         'vendor/spatie/schema-org/src/BaseType.php',
+        'vendor/spatie/schema-org/src/ListItem.php',
+        'vendor/spatie/schema-org/src/BreadcrumbList.php',
+        'vendor/spatie/schema-org/src/WebPage.php',
+        'vendor/spatie/schema-org/src/Contracts/CreativeWorkContract.php',
+        'vendor/spatie/schema-org/src/Contracts/ThingContract.php',
+        'vendor/spatie/schema-org/src/Type.php',
     ];
 
     public static function flush()
@@ -42,9 +51,10 @@ class SpatieCleanup implements Flushable
         $config = self::config();
         $foldersToDelete = self::get_real_paths($config->get('folders_to_delete'));
         $keepFolders = self::get_real_paths($config->get('keep_folders'));
-        $keepFiles = self::get_real_paths($config->get('keep_files'));
+        $keepFiles = $config->get('keep_files');
         // add contracts
         $keepFiles = self::add_contracts($keepFiles);
+        $keepFiles = self::get_real_paths($keepFiles);
 
         foreach ($foldersToDelete as $folder) {
             self::delete_files($folder, $keepFolders, $keepFiles);
@@ -62,17 +72,27 @@ class SpatieCleanup implements Flushable
 
             // Skip directories that are in the keep list
             if (in_array(dirname($file->getRealPath()), $keepFolders, true)) {
-                DB::alteration_message('Skipping ' . $file->getRealPath(), 'created');
+                if(self::DEBUG) {
+                    DB::alteration_message('Skipping ' . $file->getRealPath(), 'created');
+                }
                 continue;
             }
 
             // Delete files that are not in the keep list
             if ($file->isFile() && !in_array($file->getRealPath(), $keepFiles, true)) {
                 try {
+                    if(self::DEBUG) {
+                        DB::alteration_message('DELETING ' . $file->getRealPath(), 'created');
+                    }
                     unlink($file->getRealPath());
-                    DB::alteration_message('DELETING ' . $file->getRealPath(), 'created');
                 } catch (Exception $e) {
-                    DB::alteration_message('Failed to delete ' . $file->getRealPath() . ': ' . $e->getMessage(), 'deleted');
+                    if(self::DEBUG) {
+                        DB::alteration_message('Failed to delete ' . $file->getRealPath() . ': ' . $e->getMessage(), 'deleted');
+                    }
+                }
+            } else {
+                if(self::DEBUG) {
+                    DB::alteration_message('Skipping ' . $file->getRealPath(), 'created');
                 }
             }
         }

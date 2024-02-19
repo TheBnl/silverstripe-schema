@@ -8,7 +8,7 @@
 
 namespace Broarm\Schema;
 
-use Broarm\Schema\Builder\SchemaBuilder;
+use Broarm\Schema\SchemaBuilder;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataExtension;

@@ -20,8 +20,4 @@ abstract class SchemaBuilder
      */
     abstract public function getSchema($page);
 
-
-
-
-
 }

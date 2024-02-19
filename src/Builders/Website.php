@@ -6,7 +6,7 @@
  * Date: 04/11/16
  */
 
-namespace Broarm\Schema\Builder;
+namespace Broarm\Schema\Builders;
 
 use Broarm\Schema\SchemaBuilder;
 use SilverStripe\Control\Director;

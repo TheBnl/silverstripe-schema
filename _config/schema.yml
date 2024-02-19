@@ -6,8 +6,11 @@ Page:
   extensions:
     - 'Broarm\Schema\SchemaExtension'
   active_schema:
-    - 'Broarm\Schema\Builder\Website'
-    - 'Broarm\Schema\Builder\Breadcrumbs'
+    - 'Broarm\Schema\Builders\Website'
+    - 'Broarm\Schema\Builders\Breadcrumbs'
 # SilverStripe\Blog\Model\BlogPost:
 #   active_schema:
 #     - 'Broarm\Schema\Builder\NewsArticle'
+# Broarm\Schema\ComposerCleanup\SpatieCleanup:
+#   keep_files:
+#     - 'path/to/file'
