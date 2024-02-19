@@ -41,6 +41,7 @@ class SpatieCleanup implements Flushable
         'vendor/spatie/schema-org/src/ListItem.php',
         'vendor/spatie/schema-org/src/BreadcrumbList.php',
         'vendor/spatie/schema-org/src/WebPage.php',
+        'vendor/spatie/schema-org/src/WebSite.php',
         'vendor/spatie/schema-org/src/Contracts/CreativeWorkContract.php',
         'vendor/spatie/schema-org/src/Contracts/ThingContract.php',
         'vendor/spatie/schema-org/src/Type.php',
