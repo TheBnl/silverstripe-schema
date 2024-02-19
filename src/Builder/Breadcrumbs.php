@@ -33,8 +33,9 @@ class Breadcrumbs extends SchemaBuilder
                 $breadcrumb->name($page->Title);
                 $breadcrumb->position($pos);
                 $breadcrumb->url($page->AbsoluteLink());
-                $obj->itemListElement($breadcrumb);
+                $breadcrumbs[] = $breadcrumb;
             }
+            $obj->itemListElement($breadcrumbs);
             return $obj;
         } else {
             return null;
