@@ -16,7 +16,7 @@ use Spatie\SchemaOrg\WebSite as SchemaOrgWebSite;
 /**
  * Class Website
  */
-class Website extends SchemaBuilder
+class WebSiteSchema extends SchemaBuilder
 {
     /**
      * Create the website schema object
@@ -26,12 +26,14 @@ class Website extends SchemaBuilder
      **/
     public function getSchema($page): ?SchemaOrgWebSite
     {
-        $siteConfig = SiteConfig::current_site_config();
+        if($page->URLSegment === 'home') {
+            $siteConfig = SiteConfig::current_site_config();
+            $website = new SchemaOrgWebSite();
+            $website->name($siteConfig->Title);
+            $website->url(Director::absoluteBaseURL());
 
-        $website = new SchemaOrgWebSite();
-        $website->name($siteConfig->Title);
-        $website->url(Director::absoluteBaseURL());
-
-        return $website;
+            return $website;
+        }
+        return null;
     }
 }

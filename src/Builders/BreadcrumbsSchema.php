@@ -15,7 +15,7 @@ use Spatie\SchemaOrg\ListItem;
 /**
  * Class Breadcrumbs
  */
-class Breadcrumbs extends SchemaBuilder
+class BreadcrumbsSchema extends SchemaBuilder
 {
     /**
      * Create the breadcrumb schema object
@@ -24,7 +24,7 @@ class Breadcrumbs extends SchemaBuilder
      *
      * @return BreadcrumbList|null
      */
-    public function getSchema($page)
+    public function getSchema($page): ?BreadcrumbList
     {
         $breadcrumbList = $page->getBreadcrumbItems();
         if ($breadcrumbList->count() > 1) {
@@ -38,8 +38,7 @@ class Breadcrumbs extends SchemaBuilder
             }
             $obj->itemListElement($breadcrumbs);
             return $obj;
-        } else {
-            return null;
         }
+        return null;
     }
 }

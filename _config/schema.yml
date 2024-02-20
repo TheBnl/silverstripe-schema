@@ -6,8 +6,9 @@ Page:
   extensions:
     - 'Broarm\Schema\SchemaExtension'
   active_schema:
-    - 'Broarm\Schema\Builders\Website'
-    - 'Broarm\Schema\Builders\Breadcrumbs'
+    - 'Broarm\Schema\Builders\WebSiteSchema'
+    - 'Broarm\Schema\Builders\WebPageSchema'
+    - 'Broarm\Schema\Builders\BreadcrumbsSchema'
 ##########################
 # ## Other Pages
 ##########################
