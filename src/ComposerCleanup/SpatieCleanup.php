@@ -44,7 +44,6 @@ class SpatieCleanup implements Flushable
         'vendor/spatie/schema-org/src/WebSite.php',
         'vendor/spatie/schema-org/src/Contracts/CreativeWorkContract.php',
         'vendor/spatie/schema-org/src/Contracts/ThingContract.php',
-
     ];
 
     public static function flush()
