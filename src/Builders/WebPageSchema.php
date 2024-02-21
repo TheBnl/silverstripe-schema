@@ -10,6 +10,7 @@ namespace Broarm\Schema\Builders;
 
 use Broarm\Schema\SchemaBuilder;
 use DateTimeImmutable;
+use SilverStripe\i18n\i18n;
 use Spatie\SchemaOrg\WebPage;
 
 /**
@@ -32,6 +33,7 @@ class WebPageSchema extends SchemaBuilder
         $webpage->dateCreated(new DateTimeImmutable($page->Created));
         $webpage->dateModified(new DateTimeImmutable($page->LastEdited));
         $webpage->description($page->MetaDescription);
+        $webpage->inLanguage(i18n::get_locale());
 
         return $webpage;
     }

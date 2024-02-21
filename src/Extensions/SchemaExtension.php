@@ -42,7 +42,7 @@ class SchemaExtension extends DataExtension
      * @param $tags
      * @param $schema
      */
-    private function appendSchema(&$tags, BaseType $schemaObject)
+    private function appendSchema(&$tags, ?BaseType $schemaObject)
     {
         if ($schemaObject) {
             Requirements::insertHeadTags(
