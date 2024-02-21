@@ -13,6 +13,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\Requirements;
+use Spatie\SchemaOrg\BaseType;
 
 /**
  * SchemaExtension
@@ -27,11 +28,10 @@ class SchemaExtension extends DataExtension
      */
     public function MetaTags(&$tags)
     {
-        $schemas = array_filter($this->owner->config()->get('active_schema'));
-        foreach ($schemas as $schema) {
-            if (self::is_valid($schema)) {
-                $this->appendSchema($tags, new $schema());
-            }
+        $schemas = $this->getOwner()->getSchemas();
+        /** @var BaseType $schemaObject */
+        foreach($schemas as $schemaObject) {
+            $this->appendSchema($tags, $schemaObject);
         }
     }
 
@@ -42,9 +42,8 @@ class SchemaExtension extends DataExtension
      * @param $tags
      * @param $schema
      */
-    private function appendSchema(&$tags, SchemaBuilder $schema)
+    private function appendSchema(&$tags, BaseType $schemaObject)
     {
-        $schemaObject = $schema->getSchema($this->owner);
         if ($schemaObject) {
             Requirements::insertHeadTags(
                 '<script type="application/ld+json">' . json_encode($schemaObject->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
@@ -54,15 +53,22 @@ class SchemaExtension extends DataExtension
     }
 
     /**
-     * Check if the set schema is of an active and available type
      *
-     * @param $schema
      *
-     * @return bool
+     * @return BaseType[]
      */
-    private static function is_valid($schema)
+    public function getSchemas()
     {
-        return class_exists($schema) && new $schema() instanceof SchemaBuilder;
+        $array = [];
+        $schemas = array_filter($this->owner->config()->get('active_schema'));
+        foreach ($schemas as $schema) {
+            if (! (class_exists($schema) && new $schema() instanceof SchemaBuilder)) {
+                user_error("Schema {$schema} is not a valid schema", E_USER_WARNING);
+            }
+            $schemaBuilder = new $schema();
+            $array[$schema] = $schemaBuilder->getSchema($this->owner);
+        }
+        return $array;
     }
 
 }
