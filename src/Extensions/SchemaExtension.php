@@ -44,11 +44,11 @@ class SchemaExtension extends DataExtension
      */
     private function appendSchema(&$tags, SchemaBuilder $schema)
     {
-        $schema = $schema->getSchema($this->owner);
-        if ($schema) {
+        $schemaObject = $schema->getSchema($this->owner);
+        if ($schemaObject) {
             Requirements::insertHeadTags(
-                '<script type="application/ld+json">' . json_encode($schema->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
-                get_class($schema)
+                '<script type="application/ld+json">' . json_encode($schemaObject->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
+                get_class($schemaObject)
             );
         }
     }
