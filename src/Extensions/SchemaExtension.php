@@ -28,7 +28,7 @@ class SchemaExtension extends DataExtension
      */
     public function MetaTags(&$tags)
     {
-        $schemaBuilders = $this->getOwner()->getSchemasOrg();
+        $schemaBuilders = $this->getSchemasOrg();
         /** @var SchemaBuilder $schemaBuilder */
         foreach($schemaBuilders as $schemaBuilder) {
             $this->appendSchemaOrg($tags, $schemaBuilder);
@@ -73,7 +73,7 @@ class SchemaExtension extends DataExtension
      *
      * @return SchemaBuilder[]
      */
-    protected function getSchemasOrg()
+    public function getSchemasOrg()
     {
         $array = [];
         $schemas = array_filter($this->owner->config()->get('active_schema'));
