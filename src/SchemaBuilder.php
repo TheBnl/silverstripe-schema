@@ -31,7 +31,10 @@ abstract class SchemaBuilder
         $key = $objectClassName . '_' . $objectId . '_' . $schemaClassName;
         /** @var CacheInterface $cache */
         $cache = Injector::inst()->get(CacheInterface::class . '.schema_org');
-        return unserialize($cache->get($key));
+        if($cache->has($key) === false) {
+            return null;
+        }
+        return unserialize((string) $cache->get($key));
     }
 
     public static function set_schema_in_cache($objectClassName, $objectId, $schemaClassName, $value)
