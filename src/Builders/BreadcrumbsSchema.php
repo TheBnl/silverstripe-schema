@@ -32,7 +32,7 @@ class BreadcrumbsSchema extends SchemaBuilder
             foreach ($breadcrumbList as $pos => $page) {
                 $breadcrumb = new ListItem();
                 $breadcrumb->name($page->Title);
-                $breadcrumb->position($pos);
+                $breadcrumb->position($pos + 1);
                 $breadcrumb->url($page->AbsoluteLink());
                 $breadcrumbs[] = $breadcrumb;
             }
