@@ -9,6 +9,7 @@
 namespace Broarm\Schema;
 
 use Broarm\Schema\SchemaBuilder;
+use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataExtension;
@@ -29,10 +30,31 @@ class SchemaExtension extends DataExtension
      */
     public function MetaTags(&$tags)
     {
-        $schemaBuilders = $this->getSchemasOrg();
-        /** @var SchemaBuilder $schemaBuilder */
-        foreach($schemaBuilders as $schemaBuilder) {
-            $this->appendSchemaOrg($tags, $schemaBuilder);
+        $curr = Controller::curr();
+        if($curr) {
+            $request = Controller::curr()->getRequest();
+            if($request) {
+                if($request->isAjax()) {
+                    return;
+                }
+                if($request->param('Action')) {
+                    return;
+                }
+                if(! empty($_GET)) {
+                    if(count($_GET) > 1) {
+                        return;
+                    } else {
+                        if(! array_key_exists('start', $_GET)) {
+                            return;
+                        }
+                    }
+                }
+                $schemaBuilders = $this->getSchemasOrg();
+                /** @var SchemaBuilder $schemaBuilder */
+                foreach($schemaBuilders as $schemaBuilder) {
+                    $this->appendSchemaOrg($tags, $schemaBuilder);
+                }
+            }
         }
     }
 
