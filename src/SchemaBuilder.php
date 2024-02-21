@@ -9,6 +9,7 @@
 namespace Broarm\Schema;
 
 use Psr\SimpleCache\CacheInterface;
+use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
 use Spatie\SchemaOrg\Base;
 use Spatie\SchemaOrg\BaseType;
@@ -16,7 +17,7 @@ use Spatie\SchemaOrg\BaseType;
 /**
  * SchemaBuilder
  */
-abstract class SchemaBuilder
+abstract class SchemaBuilder implements Flushable
 {
     /**
      * Get the schema from the given data
@@ -56,6 +57,11 @@ abstract class SchemaBuilder
     public static function make_cache_key(string $objectClassName, int $objectId, string $schemaClassName): string
     {
         return str_replace('\\', '-', $objectClassName . '_' . $objectId . '_' . $schemaClassName);
+    }
+
+    public static function flush()
+    {
+        self::clear_schema_cache();
     }
 
 }

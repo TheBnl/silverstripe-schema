@@ -12,6 +12,7 @@ use Broarm\Schema\SchemaBuilder;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\View\Requirements;
 use Spatie\SchemaOrg\BaseType;
 
@@ -45,28 +46,33 @@ class SchemaExtension extends DataExtension
     private function appendSchemaOrg(&$tags, $schemaBuilder)
     {
         if ($schemaBuilder) {
-            $objectClassName = get_class($this->owner);
+            $owner = $this->getOwner();
+            $objectClassName = get_class($owner);
             $schemaBuilderClassName = get_class($schemaBuilder);
             $array = SchemaBuilder::get_schema_from_cache(
                 $objectClassName,
-                $this->owner->ID,
+                $owner->ID,
                 $schemaBuilderClassName
             );
             if(! $array) {
                 $schemaObject = $schemaBuilder->getSchema($this->owner);
                 if($schemaObject) {
+                    $array = $schemaObject->toArray();
                     SchemaBuilder::set_schema_in_cache(
                         $objectClassName,
-                        $this->owner->ID,
+                        $owner->ID,
                         $schemaBuilderClassName,
-                        $schemaObject->toArray()
+                        $array
                     );
                 }
             }
-            Requirements::insertHeadTags(
-                '<script type="application/ld+json">' . json_encode($array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
-                $schemaBuilderClassName
-            );
+            if(!empty($array)) {
+                $string = str_replace('$', '&#36;', json_encode($array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+                Requirements::insertHeadTags(
+                    '<script type="application/ld+json">' . $string . '</script>',
+                    $schemaBuilderClassName
+                );
+            }
         }
     }
 
@@ -80,11 +86,12 @@ class SchemaExtension extends DataExtension
         $array = [];
         $schemas = array_filter($this->owner->config()->get('active_schema'));
         foreach ($schemas as $schema) {
-            if (! (class_exists($schema) && new $schema() instanceof SchemaBuilder)) {
-                user_error("Schema {$schema} is not a valid schema", E_USER_WARNING);
+            if(class_exists($schema)) {
+                $schemaBuilder = new $schema();
+                if ($schemaBuilder instanceof SchemaBuilder) {
+                    $array[$schema] = $schemaBuilder;
+                }
             }
-            $schemaBuilder = new $schema();
-            $array[$schema] = $schemaBuilder;
         }
         return $array;
     }
