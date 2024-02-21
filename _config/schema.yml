@@ -1,6 +1,13 @@
 ---
 Name: schema
 ---
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.schema_org:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: 'schema_org'
+    defaultLifetime: 864000
+
 Page:
   # default_image: 'path/to/logo.png'
   extensions:

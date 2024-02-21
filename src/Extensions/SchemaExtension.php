@@ -28,10 +28,10 @@ class SchemaExtension extends DataExtension
      */
     public function MetaTags(&$tags)
     {
-        $schemas = $this->getOwner()->getSchemas();
-        /** @var BaseType $schemaObject */
-        foreach($schemas as $schemaObject) {
-            $this->appendSchema($tags, $schemaObject);
+        $schemaBuilders = $this->getOwner()->getSchemasOrg();
+        /** @var SchemaBuilder $schemaBuilder */
+        foreach($schemaBuilders as $schemaBuilder) {
+            $this->appendSchemaOrg($tags, $schemaBuilder);
         }
     }
 
@@ -42,12 +42,28 @@ class SchemaExtension extends DataExtension
      * @param $tags
      * @param $schema
      */
-    private function appendSchema(&$tags, ?BaseType $schemaObject)
+    private function appendSchemaOrg(&$tags, $schemaBuilder)
     {
-        if ($schemaObject) {
+        if ($schemaBuilder) {
+            $objectClassName = get_class($this->owner);
+            $schemaBuilderClassName = get_class($schemaBuilder);
+            $array = SchemaBuilder::get_schema_from_cache(
+                $objectClassName,
+                $this->owner->ID,
+                $schemaBuilderClassName
+            );
+            if(! $array) {
+                $array = $schemaBuilder->getSchema($this->owner);
+                SchemaBuilder::set_schema_in_cache(
+                    $objectClassName,
+                    $this->owner->ID,
+                    $schemaBuilderClassName,
+                    $array
+                );
+            }
             Requirements::insertHeadTags(
-                '<script type="application/ld+json">' . json_encode($schemaObject->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
-                get_class($schemaObject)
+                '<script type="application/ld+json">' . json_encode($array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
+                $schemaBuilderClassName
             );
         }
     }
@@ -55,9 +71,9 @@ class SchemaExtension extends DataExtension
     /**
      *
      *
-     * @return BaseType[]
+     * @return SchemaBuilder[]
      */
-    public function getSchemas()
+    protected function getSchemasOrg()
     {
         $array = [];
         $schemas = array_filter($this->owner->config()->get('active_schema'));
@@ -66,9 +82,11 @@ class SchemaExtension extends DataExtension
                 user_error("Schema {$schema} is not a valid schema", E_USER_WARNING);
             }
             $schemaBuilder = new $schema();
-            $array[$schema] = $schemaBuilder->getSchema($this->owner);
+            $array[$schema] = $schemaBuilder;
         }
         return $array;
     }
+
+
 
 }
