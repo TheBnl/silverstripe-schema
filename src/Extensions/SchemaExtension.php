@@ -53,13 +53,15 @@ class SchemaExtension extends DataExtension
                 $schemaBuilderClassName
             );
             if(! $array) {
-                $array = $schemaBuilder->getSchema($this->owner);
-                SchemaBuilder::set_schema_in_cache(
-                    $objectClassName,
-                    $this->owner->ID,
-                    $schemaBuilderClassName,
-                    $array
-                );
+                $schemaObject = $schemaBuilder->getSchema($this->owner);
+                if($schemaObject) {
+                    SchemaBuilder::set_schema_in_cache(
+                        $objectClassName,
+                        $this->owner->ID,
+                        $schemaBuilderClassName,
+                        $schemaObject->toArray()
+                    );
+                }
             }
             Requirements::insertHeadTags(
                 '<script type="application/ld+json">' . json_encode($array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>',
@@ -87,6 +89,10 @@ class SchemaExtension extends DataExtension
         return $array;
     }
 
+    public function onAfterWrite()
+    {
+        SchemaBuilder::clear_schema_cache();
+    }
 
 
 }
