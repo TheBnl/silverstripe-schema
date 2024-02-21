@@ -28,7 +28,7 @@ abstract class SchemaBuilder
 
     public static function get_schema_from_cache(string $objectClassName, int $objectId, string $schemaClassName): ?array
     {
-        $key = $objectClassName . '_' . $objectId . '_' . $schemaClassName;
+        $key = self::make_cache_key($objectClassName, $objectId, $schemaClassName);
         /** @var CacheInterface $cache */
         $cache = Injector::inst()->get(CacheInterface::class . '.schema_org');
         if($cache->has($key) === false) {
@@ -39,7 +39,7 @@ abstract class SchemaBuilder
 
     public static function set_schema_in_cache(string $objectClassName, int $objectId, string $schemaClassName, ?array $value)
     {
-        $key = $objectClassName . '_' . $objectId . '_' . $schemaClassName;
+        $key = self::make_cache_key($objectClassName, $objectId, $schemaClassName);
         /** @var CacheInterface $cache */
         $cache = Injector::inst()->get(CacheInterface::class . '.schema_org');
         $cache->set($key, serialize($value));
@@ -51,6 +51,11 @@ abstract class SchemaBuilder
 
         // remove all items in this (namespaced) cache
         $cache->clear();
+    }
+
+    public static function make_cache_key(string $objectClassName, int $objectId, string $schemaClassName): string
+    {
+        return str_replace('\\', '-', $objectClassName . '_' . $objectId . '_' . $schemaClassName);
     }
 
 }
