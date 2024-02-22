@@ -27,6 +27,12 @@ abstract class SchemaBuilder implements Flushable
      */
     abstract public function getSchema($page);
 
+
+    protected function filterArray(array $array): array
+    {
+        return array_values(array_filter($array, $array));
+    }
+
     public static function get_schema_from_cache(string $objectClassName, int $objectId, string $schemaClassName): ?array
     {
         $key = self::make_cache_key($objectClassName, $objectId, $schemaClassName);
