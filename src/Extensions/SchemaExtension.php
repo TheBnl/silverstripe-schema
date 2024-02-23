@@ -22,6 +22,11 @@ use Spatie\SchemaOrg\BaseType;
  */
 class SchemaExtension extends DataExtension
 {
+    private static $exempted_get_vars = [
+        'start',
+        'flush',
+    ];
+
     /**
      * Hook onto the page meta tags and append any configured schema objects
      * fixme: does not trigger correctly on DataObjects pages
@@ -40,11 +45,16 @@ class SchemaExtension extends DataExtension
                 if($request->param('Action')) {
                     return;
                 }
-                if(! empty($_GET)) {
+                $postVars = $request->postVars();
+                if(! empty($postVars)) {
+                    return;
+                }
+                $getVars = $request->getVars();
+                if(! empty($getVars)) {
                     if(count($_GET) > 1) {
                         return;
                     } else {
-                        if(! array_key_exists('start', $_GET)) {
+                        if(!empty(array_intersect(array_keys($getVars), Config::inst()->get(static::class, 'exempted_get_vars')))) {
                             return;
                         }
                     }
