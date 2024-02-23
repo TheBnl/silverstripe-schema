@@ -79,30 +79,12 @@ class SchemaExtension extends DataExtension
     {
         if ($schemaBuilder) {
             $owner = $this->getOwner();
-            $objectClassName = get_class($owner);
-            $schemaBuilderClassName = get_class($schemaBuilder);
-            $array = SchemaBuilder::get_schema_from_cache(
-                $objectClassName,
-                $owner->ID,
-                $schemaBuilderClassName
-            );
-            if(! $array) {
-                $schemaObject = $schemaBuilder->getSchema($this->owner);
-                if($schemaObject) {
-                    $array = $schemaObject->toArray();
-                    SchemaBuilder::set_schema_in_cache(
-                        $objectClassName,
-                        $owner->ID,
-                        $schemaBuilderClassName,
-                        $array
-                    );
-                }
-            }
+            $array = $schemaBuilder->getSchemaFromCache($owner);
             if(!empty($array)) {
                 $string = str_replace('$', '&#36;', json_encode($array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
                 Requirements::insertHeadTags(
                     '<script type="application/ld+json">' . $string . '</script>',
-                    $schemaBuilderClassName
+                    get_class($schemaBuilder)
                 );
             }
         }
