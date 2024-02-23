@@ -62,7 +62,8 @@ abstract class SchemaBuilder implements Flushable
         /** @var CacheInterface $cache */
         $cache = Injector::inst()->get(CacheInterface::class . '.schema_org');
         if((bool) $cache->has($key) !== false) {
-            return unserialize((string) $cache->get($key));
+            $return = unserialize((string) $cache->get($key));
+            return is_array($return) ? $return : null;
         }
         return null;
     }
