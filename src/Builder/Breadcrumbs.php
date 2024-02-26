@@ -1,21 +1,11 @@
 <?php
-/**
- * Breadcrumbs.php
- *
- * @author Bram de Leeuw
- * Date: 03/11/16
- */
 
 namespace Broarm\Schema\Builder;
 
 use Broarm\Schema\Type\BreadcrumbListSchema;
 
-/**
- * Class Breadcrumbs
- */
 class Breadcrumbs extends SchemaBuilder
 {
-
     /**
      * Create the breadcrumb schema object
      *

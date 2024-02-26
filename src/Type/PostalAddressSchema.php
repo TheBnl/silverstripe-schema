@@ -8,33 +8,21 @@
 
 namespace Broarm\Schema\Type;
 
-/**
- * Class PostalAddressSchema
- *
- * @package Broarm\Schema\Type
- * @property string streetAddress;
- * @property string addressLocality;
- * @property string addressRegion;
- * @property string postalCode;
- * @property string addressCountry;
- */
 class PostalAddressSchema extends SchemaType
 {
-    /**
-     * PostalAddressSchema constructor.
-     *
-     * @param $streetAddress String
-     * @param $addressLocality String
-     * @param $addressRegion String
-     * @param $postalCode String
-     * @param $addressCountry String
-     */
-    public function __construct($streetAddress, $addressLocality, $addressRegion, $postalCode, $addressCountry)
+    public string $type = 'PostalAddress';
+
+    public string $streetAddress;
+    public string $addressLocality;
+    public string $addressRegion;
+    public string $postalCode;
+    public string $addressCountry;
+
+    public function __construct(string $streetAddress, string $addressLocality, string $addressRegion, string $postalCode, string $addressCountry)
     {
-        $this->{'@type'} = 'PostalAddress';
         $this->streetAddress = $streetAddress;
         $this->addressLocality = $addressLocality;
-        $this->addressRegion = $addressLocality;
+        $this->addressRegion = $addressRegion;
         $this->postalCode = $postalCode;
         $this->addressCountry = $addressCountry;
     }

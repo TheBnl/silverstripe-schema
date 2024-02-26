@@ -1,25 +1,16 @@
 <?php
-/**
- * SearchActionSchema.php
- *
- * @author Bram de Leeuw
- * Date: 04/11/16
- */
 
 namespace Broarm\Schema\Type;
 
-/**
- * Class SearchActionSchema
- *
- * @package Broarm\Schema\Type
- * @property string target
- */
 class SearchActionSchema extends SchemaType
 {
-    public function __construct($target, $queryInput)
+    public string $type = 'SearchAction';
+    public string $target;
+    public string $queryInput; // FIXME: google uses query-input ?
+
+    public function __construct(string $target, string $queryInput)
     {
-        $this->{'@type'} = 'SearchAction';
         $this->target = $target;
-        $this->{'query-input'} = $queryInput;
+        $this->queryInput = $queryInput;
     }
 }

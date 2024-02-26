@@ -1,14 +1,7 @@
 <?php
-/**
- * LocalBusiness.php
- *
- * @author Bram de Leeuw
- * Date: 04/11/16
- */
 
 namespace Broarm\Schema\Builder;
 
-use Broarm\Schema\Schema;
 use Broarm\Schema\Type\GeoCoordinatesSchema;
 use Broarm\Schema\Type\LocalBusinessSchema;
 use Broarm\Schema\Type\PostalAddressSchema;
@@ -16,9 +9,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\SiteConfig\SiteConfig;
 
-/**
- * Class LocalBusiness
- */
 class LocalBusiness extends SchemaBuilder
 {
     /**
@@ -36,15 +26,14 @@ class LocalBusiness extends SchemaBuilder
             Director::absoluteBaseURL(),
             $siteConfig->Title,
             new PostalAddressSchema(
-                $siteConfig->getField('Address'),
-                $siteConfig->getField('Suburb'),
-                $siteConfig->getField('State'),
-                $siteConfig->getField('Postcode'),
-                $siteConfig->getField('Country')
+                $siteConfig->getField('Address') ?? '',
+                $siteConfig->getField('Suburb') ?? '',
+                $siteConfig->getField('State') ?? '',
+                $siteConfig->getField('Postcode') ?? '',
+                $siteConfig->getField('Country') ?? ''
             ),
             Director::absoluteBaseURL()
         );
-
 
         if (SiteConfig::has_extension('Geocodable')) {
             $localBusiness->geo = new GeoCoordinatesSchema(
@@ -53,11 +42,9 @@ class LocalBusiness extends SchemaBuilder
             );
         }
 
-
         if ($telephone = $siteConfig->getField('Phone')) {
             $localBusiness->telephone = $telephone;
         }
-
 
         /**
          * You can set the image in your config.yml

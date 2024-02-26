@@ -1,10 +1,4 @@
 <?php
-/**
- * Website.php
- *
- * @author Bram de Leeuw
- * Date: 04/11/16
- */
 
 namespace Broarm\Schema\Builder;
 
@@ -14,9 +8,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\ORM\Search\FulltextSearchable;
 use SilverStripe\SiteConfig\SiteConfig;
 
-/**
- * Class Website
- */
 class Website extends SchemaBuilder
 {
     /**

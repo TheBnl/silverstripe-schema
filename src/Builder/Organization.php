@@ -1,10 +1,4 @@
 <?php
-/**
- * Organization.php
- *
- * @author Bram de Leeuw
- * Date: 03/11/16
- */
 
 namespace Broarm\Schema\Builder;
 
@@ -15,9 +9,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\SiteConfig\SiteConfig;
 
-/**
- * Class Organization
- */
 class Organization extends SchemaBuilder
 {
     /**

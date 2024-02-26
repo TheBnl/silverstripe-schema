@@ -2,33 +2,25 @@
 
 namespace Broarm\Schema\Type;
 
-/**
- * Class ProductSchema
- *
- * @author Bram de Leeuw
- * Date: 10/07/17
- *
- * @package Broarm\Schema\Type
- *
- * @property string name
- * @property string description
- * @property string sku
- * @property string gtin
- * @property BrandSchema brand
- * @property OfferSchema offers
- * @property array image
- */
 class ProductSchema extends SchemaType
 {
+    public string $context = 'http://schema.org';
+    public string $type = 'Product';
+    public string $name;
+    public string $description;
+    public OfferSchema $offers;
+    public string|null $sku;
+    public string|null $gtin;
+    public BrandSchema|null $brand;
+    public array $image;
+
     public function __construct($name, $description, OfferSchema $offer, $sku = null, $gtin = null, BrandSchema $brand = null, $images = []) {
-        $this->{'@context'} = 'http://schema.org';
-        $this->{'@type'} = 'Product';
         $this->name = $name;
         $this->description = $description;
+        $this->offers = $offer;
         $this->sku = $sku;
         $this->gtin = $gtin;
         $this->brand = $brand;
-        $this->offers = $offer;
         $this->image = $images;
     }
 }

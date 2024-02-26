@@ -11,12 +11,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\SiteConfig\SiteConfig;
 
-/**
- * Class NewsArticle
- *
- * @author Bram de Leeuw
- * Date: 10/07/17
- */
 class NewsArticle extends SchemaBuilder
 {
     /**

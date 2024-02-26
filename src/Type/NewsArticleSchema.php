@@ -2,38 +2,19 @@
 
 namespace Broarm\Schema\Type;
 
-/**
- * Class NewsArticleSchema
- *
- * @author Bram de Leeuw
- * Date: 10/07/17
- *
- * @package Broarm\Schema\Type
- *
- *
- * @property  string             $headline
- * @property string             $datePublished
- * @property string             $dateModified
- * @property string             $description
- * @property EntityOfPageSchema $mainEntityOfPage
- * @property ImageObjectSchema  $image
- * @property PersonSchema       $author
- * @property OrganizationSchema $publisher
- */
 class NewsArticleSchema extends SchemaType
 {
-    /**
-     * NewsArticleSchema constructor.
-     *
-     * @param string             $headline
-     * @param string             $datePublished
-     * @param string             $dateModified
-     * @param string             $description
-     * @param EntityOfPageSchema $mainEntityOfPage
-     * @param ImageObjectSchema  $image
-     * @param PersonSchema       $author
-     * @param OrganizationSchema $publisher
-     */
+    public string $context = 'http://schema.org';
+    public string $type = 'NewsArticle';
+    public string $headline;
+    public string $datePublished;
+    public string $dateModified;
+    public string $description;
+    public EntityOfPageSchema $mainEntityOfPage;
+    public ImageObjectSchema $image;
+    public PersonSchema $author;
+    public OrganizationSchema $publisher;
+
     public function __construct(
         $headline,
         $datePublished,
@@ -44,8 +25,6 @@ class NewsArticleSchema extends SchemaType
         OrganizationSchema $publisher = null,
         ImageObjectSchema $image = null
     ) {
-        $this->{'@context'} = 'http://schema.org';
-        $this->{'@type'} = 'NewsArticle';
         $this->headline = $headline;
         $this->datePublished = $datePublished;
         $this->dateModified = $dateModified;

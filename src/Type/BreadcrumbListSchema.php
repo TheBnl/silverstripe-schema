@@ -1,34 +1,17 @@
 <?php
-/**
- * BreadcrumbListSchema.php
- *
- * @author Bram de Leeuw
- * Date: 03/11/16
- */
 
 namespace Broarm\Schema\Type;
 
 use SilverStripe\ORM\ArrayList;
 
-/**
- * Class BreadcrumbListSchema
- * @package Broarm\Schema\Type
- *
- * @property array itemListElement;
- */
 class BreadcrumbListSchema extends SchemaType
 {
-    /**
-     * BreadcrumbListSchema constructor.
-     *
-     * @param ArrayList|null $breadcrumbs
-     */
+    public string $context = 'http://schema.org';
+    public string $type = 'BreadcrumbList';
+    public array $itemListElement = [];
+
     public function __construct(ArrayList $breadcrumbs = null)
     {
-        $this->{'@context'} = 'http://schema.org';
-        $this->{'@type'} = 'BreadcrumbList';
-        $this->itemListElement = array();
-
         if (isset($breadcrumbs)) {
             $this->makeItemListElement($breadcrumbs);
         }

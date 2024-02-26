@@ -1,34 +1,20 @@
 <?php
-/**
- * OrganizationSchema.php
- *
- * @author Bram de Leeuw
- * Date: 04/11/16
- */
 
 namespace Broarm\Schema\Type;
 
-/**
- * Class OrganizationSchema
- *
- * @property string            name
- * @property string            url
- * @property ImageObjectSchema logo
- */
 class OrganizationSchema extends SchemaType
 {
-    /**
-     * OrganizationSchema constructor.
-     *
-     * @param                   $name
-     * @param                   $url
-     * @param ImageObjectSchema $logo
-     */
-    public function __construct($name, $url, ImageObjectSchema $logo)
+    public string $context = 'http://schema.org';
+    public string $type = 'Organization';
+    public string $name;
+    public string $url;
+    public ImageObjectSchema $logo;
+    public array $contactPoint = [];
+    public array $sameAs = [];
+
+    public function __construct(string $name, string $url, ImageObjectSchema $logo)
     {
-        $this->{'@context'} = 'http://schema.org';
-        $this->{'@type'} = 'Organization';
-        $this->name = $url;
+        $this->name = $name;
         $this->url = $url;
         $this->logo = $logo;
     }
@@ -40,9 +26,6 @@ class OrganizationSchema extends SchemaType
      */
     public function addContactPoint($contactPoint)
     {
-        if (!isset($this->contactPoint)) {
-            $this->contactPoint = array();
-        }
         array_push($this->contactPoint, $contactPoint);
     }
 
@@ -53,9 +36,6 @@ class OrganizationSchema extends SchemaType
      */
     public function addSameAs($sameAs)
     {
-        if (!isset($this->sameAs)) {
-            $this->sameAs = array();
-        }
         array_push($this->sameAs, $sameAs);
     }
 }

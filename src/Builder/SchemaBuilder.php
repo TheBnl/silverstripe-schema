@@ -1,16 +1,7 @@
 <?php
-/**
- * SchemaBuilder.php
- *
- * @author Bram de Leeuw
- * Date: 03/11/16
- */
 
 namespace Broarm\Schema\Builder;
 
-/**
- * SchemaBuilder
- */
 abstract class SchemaBuilder
 {
     /**

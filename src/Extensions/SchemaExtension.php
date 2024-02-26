@@ -1,25 +1,13 @@
 <?php
-/**
- * SchemaExtension.php
- *
- * @author Bram de Leeuw
- * Date: 03/11/16
- */
 
 namespace Broarm\Schema;
 
 use Broarm\Schema\Builder\SchemaBuilder;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\Requirements;
 
-/**
- * SchemaExtension
- */
 class SchemaExtension extends DataExtension
 {
-
     /**
      * Hook onto the page meta tags and append any configured schema objects
      * fixme: does not trigger correctly on DataObjects pages
@@ -33,7 +21,6 @@ class SchemaExtension extends DataExtension
             if (self::is_valid($schema)) $this->appendSchema($tags, new $schema());
         }
     }
-
 
     /**
      * Append a schema ld+json tag
@@ -62,5 +49,4 @@ class SchemaExtension extends DataExtension
     {
         return class_exists($schema) && new $schema() instanceof SchemaBuilder;
     }
-
 }
