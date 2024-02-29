@@ -27,6 +27,29 @@ abstract class SchemaBuilder implements Flushable
      */
     abstract public function getSchema($page);
 
+    public function getSchemaFromCache($page): ?array
+    {
+        $objectClassName = get_class($page);
+        $objectId = $page->ID;
+        $schemaClassName = get_class($this);
+        $schema = self::get_schema_from_cache($objectClassName, $objectId, $schemaClassName);
+        $array = null;
+        if($schema === null) {
+            $schema = $this->getSchema($page);
+            if($schema && is_array($schema) === false) {
+                $array = $schema->toArray();
+            } elseif($schema) {
+                $array = $schema;
+            } else {
+                $array = null;
+            }
+            self::set_schema_in_cache($objectClassName, $objectId, $schemaClassName, $array);
+        } elseif(is_array($schema)) {
+            $array = $schema;
+        }
+        return $array;
+    }
+
 
     protected function filterArray(array $array): array
     {
@@ -38,10 +61,11 @@ abstract class SchemaBuilder implements Flushable
         $key = self::make_cache_key($objectClassName, $objectId, $schemaClassName);
         /** @var CacheInterface $cache */
         $cache = Injector::inst()->get(CacheInterface::class . '.schema_org');
-        if($cache->has($key) === false) {
-            return null;
+        if((bool) $cache->has($key) !== false) {
+            $return = unserialize((string) $cache->get($key));
+            return is_array($return) ? $return : null;
         }
-        return unserialize((string) $cache->get($key));
+        return null;
     }
 
     public static function set_schema_in_cache(string $objectClassName, int $objectId, string $schemaClassName, ?array $value)
