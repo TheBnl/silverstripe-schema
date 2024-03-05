@@ -31,7 +31,9 @@ abstract class SchemaType implements JsonSerializable
         foreach ($data as $key => $value) {
             if (in_array($key, $atKeys)) {
                 unset($data[$key]);
-                $data["@{$key}"] = $this->{$key};
+                if (property_exists($this, $key)) {
+                    $data["@{$key}"] = $this->{$key};
+                }
             }
 
             if ($value instanceof SchemaType) {
