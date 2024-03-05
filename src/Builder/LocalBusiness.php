@@ -37,8 +37,8 @@ class LocalBusiness extends SchemaBuilder
 
         if (SiteConfig::has_extension('Geocodable')) {
             $localBusiness->geo = new GeoCoordinatesSchema(
-                $siteConfig->getField('Lat'),
-                $siteConfig->getField('Lng')
+                $siteConfig->getField('Lat') ?? '',
+                $siteConfig->getField('Lng') ?? ''
             );
         }
 

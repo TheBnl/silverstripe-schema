@@ -6,14 +6,21 @@ class ImageObjectSchema extends SchemaType
 {
     public string $type = 'ImageObject';
     public string $url;
-    public string|null $width;
-    public string|null $height;
+    public int $width;
+    public int $height;
 
-    public function __construct($url, $width = null, $height = null)
+    public function __construct($url)
     {
-        $this->{'@type'} = 'ImageObject';
         $this->url = $url;
+    }
+
+    public function setWidth(int $width)
+    {
         $this->width = $width;
+    }
+
+    public function setHeight(int $height)
+    {
         $this->height = $height;
     }
 }

@@ -9,18 +9,34 @@ class ProductSchema extends SchemaType
     public string $name;
     public string $description;
     public OfferSchema $offers;
-    public string|null $sku;
-    public string|null $gtin;
-    public BrandSchema|null $brand;
+    public string $sku;
+    public string $gtin;
+    public BrandSchema $brand;
     public array $image;
 
-    public function __construct($name, $description, OfferSchema $offer, $sku = null, $gtin = null, BrandSchema $brand = null, $images = []) {
+    public function __construct($name, $description, OfferSchema $offer) {
         $this->name = $name;
         $this->description = $description;
         $this->offers = $offer;
+    }
+
+    public function setSku(string $sku)
+    {
         $this->sku = $sku;
+    }
+
+    public function setGtin(string $gtin)
+    {
         $this->gtin = $gtin;
+    }
+
+    public function setBrand(BrandSchema $brand)
+    {
         $this->brand = $brand;
+    }
+
+    public function setImage(array $images)
+    {
         $this->image = $images;
     }
 }

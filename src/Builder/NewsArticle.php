@@ -32,26 +32,26 @@ class NewsArticle extends SchemaBuilder
             $page->Title,
             $page->PublishDate,
             $page->LastEdited,
-            $page->dbObject('Content')->FirstParagraph(),
-            new EntityOfPageSchema($page->AbsoluteLink()),
-            new PersonSchema($author),
-            new OrganizationSchema(
-                SiteConfig::current_site_config()->Title,
-                Director::absoluteBaseURL(),
-                new ImageObjectSchema(
-                    Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image')
-                )
-            )
+            $page->dbObject('Content')->FirstParagraph()
         );
+
+        $newsArticle->setMainEntityOfPage(new EntityOfPageSchema($page->AbsoluteLink()));
+        $newsArticle->setAuthor(new PersonSchema($author));
+        $newsArticle->setPublisher(new OrganizationSchema(
+            SiteConfig::current_site_config()->Title,
+            Director::absoluteBaseURL(),
+            new ImageObjectSchema(
+                Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image')
+            )
+        ));
 
         /** @var \Image $featuredImage */
         $featuredImage = $page->FeaturedImage();
         if ($featuredImage->exists()) {
-            $newsArticle->setImageObject(new ImageObjectSchema(
-                $featuredImage->Fill(800, 800)->AbsoluteLink(),
-                800,
-                800
-            ));
+            $image = new ImageObjectSchema($featuredImage->Fill(800, 800)->AbsoluteLink());
+            $image->setWidth(800);
+            $image->setWidth(800);
+            $newsArticle->setImageObject($image);
         }
 
         return $newsArticle;

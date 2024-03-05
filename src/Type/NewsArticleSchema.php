@@ -15,35 +15,22 @@ class NewsArticleSchema extends SchemaType
     public PersonSchema $author;
     public OrganizationSchema $publisher;
 
-    public function __construct(
-        $headline,
-        $datePublished,
-        $dateModified,
-        $description,
-        EntityOfPageSchema $mainEntityOfPage = null,
-        PersonSchema $author = null,
-        OrganizationSchema $publisher = null,
-        ImageObjectSchema $image = null
-    ) {
+    public function __construct(string $headline, string $datePublished, string $dateModified, string $description) {
         $this->headline = $headline;
         $this->datePublished = $datePublished;
         $this->dateModified = $dateModified;
         $this->description = $description;
-        $this->mainEntityOfPage = $mainEntityOfPage;
-        $this->image = $image;
-        $this->author = $author;
-        $this->publisher = $publisher;
     }
 
     public function setImageObject(ImageObjectSchema $image) {
         $this->image = $image;
     }
 
-    public function setPerson(PersonSchema $author) {
+    public function setAuthor(PersonSchema $author) {
         $this->author = $author;
     }
 
-    public function setEntityOfPage(EntityOfPageSchema $mainEntityOfPage) {
+    public function setMainEntityOfPage(EntityOfPageSchema $mainEntityOfPage) {
         $this->mainEntityOfPage = $mainEntityOfPage;
     }
 
