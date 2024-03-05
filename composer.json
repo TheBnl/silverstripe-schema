@@ -2,7 +2,7 @@
   "name": "bramdeleeuw/silverstripe-schema",
   "description": "Add schema to a Silverstripe page",
   "type": "silverstripe-vendormodule",
-  "keywords": ["silverstripe", "schema", "structured data", "knowledge graph"],
+  "keywords": ["silverstripe", "schema", "schema.org", "structured data", "knowledge graph"],
   "license": "BSD-3-Clause",
   "authors": [
     {
