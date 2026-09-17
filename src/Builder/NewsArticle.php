@@ -30,8 +30,8 @@ class NewsArticle extends SchemaBuilder
 
         $newsArticle = new NewsArticleSchema(
             $page->Title,
-            $page->PublishDate,
-            $page->LastEdited,
+            $page->dbObject('PublishDate')->Rfc3339(),
+            $page->dbObject('LastEdited')->Rfc3339(),
             $page->dbObject('Content')->FirstParagraph()
         );
 
@@ -50,8 +50,11 @@ class NewsArticle extends SchemaBuilder
         if ($featuredImage->exists()) {
             $image = new ImageObjectSchema($featuredImage->Fill(800, 800)->AbsoluteLink());
             $image->setWidth(800);
-            $image->setWidth(800);
+            $image->setHeight(800);
             $newsArticle->setImageObject($image);
+        } elseif ($default = Config::inst()->get('Page', 'default_image')) {
+            // schema.org NewsArticle requires an image; fall back to the site's default image.
+            $newsArticle->setImageObject(new ImageObjectSchema(Director::absoluteBaseURL() . $default));
         }
 
         return $newsArticle;

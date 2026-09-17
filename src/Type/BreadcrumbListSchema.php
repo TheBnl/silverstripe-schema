@@ -7,7 +7,7 @@ use SilverStripe\Model\List\ArrayList;
 
 class BreadcrumbListSchema extends SchemaType
 {
-    public string $context = 'http://schema.org';
+    public string $context = 'https://schema.org';
     public string $type = 'BreadcrumbList';
     public array $itemListElement = [];
 

@@ -46,13 +46,27 @@ class LocalBusiness extends SchemaBuilder
             $localBusiness->telephone = $telephone;
         }
 
-        /**
-         * You can set the image in your config.yml
-         * Schema:
-         *  logo: 'path/to/logo.png'
-         */
-        $localBusiness->image = Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image');
+        $localBusiness->image = $this->resolveImageUrl($siteConfig);
 
         return $localBusiness;
+    }
+
+    /**
+     * Best available site image for LocalBusiness.image: prefer a real uploaded site image/logo from
+     * SiteConfig (DefaultImage or Logo, when present) over the weak `Page.default_image` fallback
+     * (often just a small favicon). All lookups are hasMethod-guarded so the module stays generic.
+     */
+    private function resolveImageUrl($siteConfig): string
+    {
+        foreach (['DefaultImage', 'Logo'] as $method) {
+            if ($siteConfig->hasMethod($method)) {
+                $image = $siteConfig->{$method}();
+                if ($image && $image->exists() && $image->hasMethod('getAbsoluteURL')) {
+                    return $image->getAbsoluteURL();
+                }
+            }
+        }
+
+        return Director::absoluteBaseURL() . Config::inst()->get('Page', 'default_image');
     }
 }

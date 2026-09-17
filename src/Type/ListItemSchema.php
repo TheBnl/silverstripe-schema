@@ -5,12 +5,12 @@ namespace Broarm\Schema\Type;
 class ListItemSchema extends SchemaType
 {
     public string $type = 'ListItem';
-    public string $position;
+    public int $position;
     public ThingSchema $item;
 
     public function __construct($position, ThingSchema $item)
     {
-        $this->position = $position;
+        $this->position = (int) $position;
         $this->item = $item;
     }
 }

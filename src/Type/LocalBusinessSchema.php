@@ -4,7 +4,7 @@ namespace Broarm\Schema\Type;
 
 class LocalBusinessSchema extends SchemaType
 {
-    public string $context = 'http://schema.org';
+    public string $context = 'https://schema.org';
     public string $type = 'LocalBusiness';
     public string $id;
     public string $name;

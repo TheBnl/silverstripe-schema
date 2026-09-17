@@ -4,7 +4,7 @@ namespace Broarm\Schema\Type;
 
 class ProductSchema extends SchemaType
 {
-    public string $context = 'http://schema.org';
+    public string $context = 'https://schema.org';
     public string $type = 'Product';
     public string $name;
     public string $description;

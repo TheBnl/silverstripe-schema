@@ -24,6 +24,6 @@ class PostalAddressSchema extends SchemaType
         $this->addressLocality = $addressLocality;
         $this->addressRegion = $addressRegion;
         $this->postalCode = $postalCode;
-        $this->addressCountry = $addressCountry;
+        $this->addressCountry = strtoupper($addressCountry);
     }
 }
