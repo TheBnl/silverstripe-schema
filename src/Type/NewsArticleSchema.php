@@ -4,7 +4,7 @@ namespace Broarm\Schema\Type;
 
 class NewsArticleSchema extends SchemaType
 {
-    public string $context = 'http://schema.org';
+    public string $context = 'https://schema.org';
     public string $type = 'NewsArticle';
     public string $headline;
     public string $datePublished;

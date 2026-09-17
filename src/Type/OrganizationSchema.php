@@ -4,7 +4,7 @@ namespace Broarm\Schema\Type;
 
 class OrganizationSchema extends SchemaType
 {
-    public string $context = 'http://schema.org';
+    public string $context = 'https://schema.org';
     public string $type = 'Organization';
     public string $name;
     public string $url;

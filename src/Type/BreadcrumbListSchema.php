@@ -7,11 +7,11 @@ use SilverStripe\Model\List\ArrayList;
 
 class BreadcrumbListSchema extends SchemaType
 {
-    public string $context = 'http://schema.org';
+    public string $context = 'https://schema.org';
     public string $type = 'BreadcrumbList';
     public array $itemListElement = [];
 
-    public function __construct(ArrayList $breadcrumbs = null)
+    public function __construct(?ArrayList $breadcrumbs = null)
     {
         if (isset($breadcrumbs)) {
             $this->makeItemListElement($breadcrumbs);
